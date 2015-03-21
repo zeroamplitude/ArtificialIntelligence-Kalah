@@ -100,15 +100,4 @@ public class Board {
         return source.getCount() == 1;
     }
 
-
-	/**
-	 * This method is responsible for checking if the pieces type is a House.
-	 * @param source An integer that represents a piece on the board.
-	 * @return true if the source piece is a house, otherwise false
-	 */
-	public boolean isHouse(int source) {
-		// TODO - implement Board.isHouse
-		throw new UnsupportedOperationException();
-	}
-
 }
