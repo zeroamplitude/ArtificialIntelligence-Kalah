@@ -26,15 +26,4 @@ public class Store extends Piece {
 		if (seeds.isEmpty()) return null;
 		else return seeds.pop();
 	}
-
-	/**
-	 * This method is responsible for checking if the source piece specified
-	 * has seeds.
-	 * @return true if the source piece is empty, otherwise false
-	 */
-	public boolean isEmpty() {
-		if (seeds.size() == 0) return true;
-		else return false;
-	}
-
 }
