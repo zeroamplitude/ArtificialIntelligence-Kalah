@@ -28,7 +28,6 @@ public class Piece {
 	 * @param item An object that represents a seed in the game Kalah.
 	 */
 	public void putItem(Seed item) {
-		// TODO - implement Piece.putItem
 		this.seeds.push(item);
 		throw new UnsupportedOperationException();
 	}
