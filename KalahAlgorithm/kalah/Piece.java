@@ -47,11 +47,8 @@ public class Piece {
 	}
 
 	public int getCount() {
-<<<<<<< HEAD
 			return this.seeds.size();
-=======
         return this.seeds.size();
->>>>>>> 3d9110f6f0d6127d015ca782a06dfac63a61e308
 	}
 
     /**
