@@ -29,6 +29,7 @@ public class Piece {
 	 */
 	public void putItem(Seed item) {
 		// TODO - implement Piece.putItem
+		this.seeds.push(item);
 		throw new UnsupportedOperationException();
 	}
 
