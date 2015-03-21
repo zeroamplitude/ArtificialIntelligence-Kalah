@@ -34,13 +34,18 @@ public class Board {
             else
                 owner = 2;
 
-            // build a stack of seeds
+            // build an empty stack of seeds
             Stack<Seed> seeds = new Stack<Seed>();
-            for (int j = 0; j < 3; j++)
-                seeds.push(new Seed(count));
 
             if (i == 6 || i == 13) {
+                // add a house to the map with empty seeds
                 pieces.put(i, new House(i, owner, seeds));
+            } else {
+                // push seeds to the stack
+                for (int j = 0; j < 3; j++)
+                    seeds.push(new Seed(count));
+                //
+                pieces.put(i, new Store(i, owner, seeds));
             }
         }
 	}

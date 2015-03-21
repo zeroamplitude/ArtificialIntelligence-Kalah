@@ -8,12 +8,13 @@ import java.util.*;
 public class Store extends Piece {
 
 	/**
-	 * 
-	 * @param seeds
-	 */
-	public Store(Stack<Seed> seeds) {
-		// TODO - implement Store.Store
-		throw new UnsupportedOperationException();
+	 *
+     * @param id
+     * @param owner
+     * @param seeds
+     */
+	public Store(int id, int owner, Stack<Seed> seeds) {
+		super(id, owner, seeds);
 	}
 
 	/**
