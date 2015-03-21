@@ -18,8 +18,7 @@ public class Seed {
 	 * @param id An integer that represents the id of the seed in the game
 	 */
 	public Seed(int id) {
-		// TODO - implement Seed.Seed
-		throw new UnsupportedOperationException();
+		this.id = id;
 	}
 
 }
