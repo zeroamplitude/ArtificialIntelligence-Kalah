@@ -56,22 +56,18 @@ public class Board {
 	 * @return A boolean object that represents if the game is over
 	 */
 	public boolean isGameOver() {
-        boolean pl = false;
-        boolean pl2
-        for(Piece cur : pieces)
-            if(cur.getClass() == Store.class)
-                if (cur.getCount() == 0)
+        boolean pl1 = true;
+        boolean pl2 = true;
+        for(Piece cur : pieces.values()) {
+            if (cur.getClass() == Store.class && cur.getCount() != 0) {
+                if (cur.getOwner() == 1)
+                    pl1 = false;
+                if (cur.getOwner() == 2)
+                    pl2 = false;
+            }
+        }
 
-	}
-
-	/**
-	 * This method check if the seed being transferred is the last seed in
-	 * the store.
-	 * @return A boolean that represents if the present seed is the last one in the store.
-	 */
-	public boolean isLastSeed() {
-		// TODO - implement Board.isLastSeed
-		throw new UnsupportedOperationException();
+        return pl1 && pl2;
 	}
 
 	/**
@@ -93,6 +89,17 @@ public class Board {
 		// TODO - implement Board.transfer
 		throw new UnsupportedOperationException();
 	}
+
+
+    /**
+     * This method check if the seed being transferred is the last seed in
+     * the store.
+     * @return A boolean that represents if the present seed is the last one in the store.
+     */
+    public boolean isLastSeed(Piece source) {
+        return source.getCount() == 1;
+    }
+
 
 	/**
 	 * This method is responsible for checking if the pieces type is a House.
