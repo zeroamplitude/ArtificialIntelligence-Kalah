@@ -7,6 +7,8 @@ import java.util.*;
  */
 public class Board {
 
+    private KalahAlgorithm algorithm;
+
 	/**
 	 * A map of type key, int, and value, piece, which represents
 	 * the piece of the board. The key is the piece ID and the
@@ -22,8 +24,10 @@ public class Board {
 	 * This is the default constructor for the Board class.This will set the
 	 * board to it's initial game state.
 	 */
-	public Board() {
-		this.pieces = new HashMap<Integer, Piece>();
+	public Board(KalahAlgorithm algorithm) {
+        this.algorithm = algorithm;
+
+        this.pieces = new HashMap<Integer, Piece>();
         int count = 0;
 
         for (int i = 0; i < 14; i++) {
@@ -85,10 +89,83 @@ public class Board {
 	 * @param source An integer that represents the piece of the board that
 	 * the seeds will be transferred from.
 	 */
-	public void transfer(int source) {
-		// TODO - implement Board.transfer
-		throw new UnsupportedOperationException();
+	public int transfer(int source, int player, int[] board) {
+        setBoard(board);
+
+        // source to board keys
+        source -= 1;
+        if (player == 2)
+            source += (6 - source) * 2;
+
+        Store origin = (Store) this.pieces.get(source);
+        int dest = source + 1;
+
+        for (int i = 0; i < origin.getCount(); i++) {
+            Seed seed = origin.getItem();
+
+            // skip opponents home
+            if ( (dest == 6 && player == 2) || (dest == 13 && player == 1) )
+                dest++;
+
+            // loop back to beginning
+            if (dest > 13)
+                dest = 0;
+
+            // get cur piece
+            Piece cur = pieces.get(dest);
+
+            // put the seed into the piece
+            cur.putItem(seed);
+
+            // check if that was the last seed
+            if (i == 1 - origin.getCount()) {
+                // check if the destination piece is a house
+                if (cur.getClass() == House.class) {
+                    if (turn == 1)
+                        return 1;
+                    else
+                        return 2;
+                }
+            }
+
+            dest ++;
+        }
+
+
+
+        algorithm.setSimBoard(convertToIntArray());
+
 	}
+
+    public int[] convertToIntArray() {
+        int[] tmp = new int[14];
+        int i = 0;
+        for (Piece cur : pieces.values())
+            tmp[i] = cur.getCount();
+        return tmp;
+    }
+
+    public void setBoard(int[] board) {
+        this.pieces.clear();
+
+        for (int i = 0; i < 14; i++) {
+            int owner;
+            if (i < 7)
+                owner = 1;
+            else
+                owner = 2;
+
+            int count = 0;
+            Stack<Seed> tmp = new Stack<Seed>();
+            for (int j = 0; j < board[i]; j++)
+                tmp.push(new Seed(count));
+
+            if (i == 6 || i == 13)
+                this.pieces.put(i, new House(i, owner, tmp));
+            else
+                this.pieces.put(i, new Store(i, owner, tmp));
+        }
+    }
 
 
     /**
@@ -99,5 +176,6 @@ public class Board {
     public boolean isLastSeed(Piece source) {
         return source.getCount() == 1;
     }
+
 
 }

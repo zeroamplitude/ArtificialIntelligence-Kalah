@@ -1,3 +1,6 @@
+package kalah;
+
+import kalah.Board;
 
 /**********************************************************************
 HOW TO RUN:
@@ -7,6 +10,7 @@ HOW TO RUN:
 class KalahAlgorithm{
 	private int[] simBoard = new int[14];
 	private int playerID;
+    private Board board;
 
 
 
@@ -15,7 +19,9 @@ class KalahAlgorithm{
 	instance of the kalah algorithm is created
 	**********************************************************************/
 	public KalahAlgorithm(int player){
-		int playerID = player;
+
+        int playerID = player;
+        this.board = new Board(this);
 	}
 
 	/**********************************************************************
@@ -155,7 +161,7 @@ class KalahAlgorithm{
 		/**********************************************************************
 		CALL SIMULATION ALGORITHM HERE
 		**********************************************************************/
-		if (!cellEmpty) newPlayer = simulateMove(move, player, board);
+		if (!cellEmpty) newPlayer = (move, player, board);
 		/**********************************************************************
 		CALL SIMULATION ALGORITHM HERE
 		**********************************************************************/
