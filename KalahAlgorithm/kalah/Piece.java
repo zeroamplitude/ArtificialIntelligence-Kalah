@@ -10,7 +10,7 @@ public class Piece {
 	/**
 	 * A stack that holds all the transferable items.
 	 */
-	private Stack<Seed> seeds;
+	protected Stack<Seed> seeds;
 	private int id;
 
     private int owner;
@@ -47,8 +47,7 @@ public class Piece {
 	}
 
 	public int getCount() {
-			return this.seeds.size();
-        return this.seeds.size();
+        return seeds.size();
 	}
 
     /**
