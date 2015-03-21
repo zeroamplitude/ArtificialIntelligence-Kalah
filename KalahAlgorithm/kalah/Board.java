@@ -12,7 +12,7 @@ public class Board {
 	 * the piece of the board. The key is the piece ID and the
 	 * value is a reference to the piece in memory.
 	 */
-	private Map<Piece> pieces;
+	private Map<Integer, Piece> pieces;
 	/**
 	 * An integer that represents the current players turn
 	 */
@@ -23,8 +23,26 @@ public class Board {
 	 * board to it's initial game state.
 	 */
 	public Board() {
-		// TODO - implement Board.Board
-		throw new UnsupportedOperationException();
+		this.pieces = new HashMap<Integer, Piece>();
+        int count = 0;
+
+        for (int i = 0; i < 14; i++) {
+            // set the piece's owner
+            int owner;
+            if (i < 7)
+                owner = 1;
+            else
+                owner = 2;
+
+            // build a stack of seeds
+            Stack<Seed> seeds = new Stack<Seed>();
+            for (int j = 0; j < 3; j++)
+                seeds.push(new Seed(count));
+
+            if (i == 6 || i == 13) {
+                pieces.put(i, new House(i, owner, seeds));
+            }
+        }
 	}
 
 	/**

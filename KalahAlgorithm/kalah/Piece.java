@@ -13,14 +13,17 @@ public class Piece {
 	private Stack<Seed> seeds;
 	private int id;
 
+    private int owner;
+
 	/**
 	 * The piece constructor. Take the stack of seeds and initializes the
 	 * seeds in the piece.
 	 * @param seeds A stack of Seeds that represent the initial piece state
 	 */
-	public Piece(int id, Stack<Seed> seeds) {
+	public Piece(int id, int owner, Stack<Seed> seeds) {
 		this.seeds = seeds;
         this.id = id;
+        this.owner = owner;
 	}
 
 	/**
@@ -49,4 +52,11 @@ public class Piece {
 		throw new UnsupportedOperationException();
 	}
 
+    /**
+     *
+     * @return An integer representing the player that owns the piece.
+     */
+    public int getOwner() {
+        return owner;
+    }
 }

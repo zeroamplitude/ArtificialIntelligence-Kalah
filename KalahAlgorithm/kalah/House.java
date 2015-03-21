@@ -11,8 +11,8 @@ public class House extends Piece {
 	 * 
 	 * @param seeds
 	 */
-	public House(int id, Stack<Seed> seeds) {
-        super(id, seeds);
+	public House(int id, int owner, Stack<Seed> seeds) {
+        super(id, owner, seeds);
 	}
 
 }
