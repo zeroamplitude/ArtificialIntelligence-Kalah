@@ -11,7 +11,6 @@ public class Piece {
 	 * A stack that holds all the transferable items.
 	 */
 	private Stack<Seed> seeds;
-	private String type;
 	private int id;
 
 	/**
@@ -19,8 +18,9 @@ public class Piece {
 	 * seeds in the piece.
 	 * @param seeds A stack of Seeds that represent the initial piece state
 	 */
-	public Piece(Stack<Seed> seeds) {
+	public Piece(int id, Stack<Seed> seeds) {
 		this.seeds = seeds;
+        this.id = id;
 	}
 
 	/**
