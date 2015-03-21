@@ -5,9 +5,22 @@ HOW TO RUN:
 - create instance of Kalah algorithm
 - call makePlay and pass it the current board
 **********************************************************************/
-class KalahAlgorithm{
+class Player {
+
+    /**
+     * An array of integers representing the quantity of seeds in a
+     * house or store
+     */
 	private int[] simBoard = new int[14];
-	private int playerID;
+
+    /**
+     * An integer that represents the players id. id can be 1 or 2.
+     */
+    private int playerID;
+
+    /**
+     * A board
+     */
     private Board board;
 
 
@@ -16,26 +29,9 @@ class KalahAlgorithm{
 	Basic constuctor to set the initial sate of the sim board when a new
 	instance of the kalah algorithm is created
 	**********************************************************************/
-	public KalahAlgorithm(int player){
-
-        int playerID = player;
+	public Player(int player){
+        this.playerID = player;
         this.board = new Board(this);
-	}
-
-	/**********************************************************************
-	Converts the board to a format useable by the transfer function
-	**********************************************************************/
-	public int[] convertBoard(int[] currBoard){
-		int[] newBoard = new int[14]; 
-		for (int i = 0; i < 7; i ++){
-			newBoard[i] = currBoard[i]; 
-		}
-		newBoard[7] = currBoard[12];
-		newBoard[8] = currBoard[11];
-		newBoard[9] = currBoard[10];
-		newBoard[13] = currBoard[13];
-
-		return newBoard;
 	}
 
 	/**********************************************************************
@@ -172,14 +168,16 @@ class KalahAlgorithm{
 		if (player == 2) move += 7;
 		if (board[move] == 0) cellEmpty = true;
 
+
+        /**********************************************************************
+		**********************CALL TRANSFER ALGORITHM HERE*********************
+		**********************************************************************/
+		if (!cellEmpty) newPlayer = this.board.transfer(move, player,board);
 		/**********************************************************************
 		**********************CALL TRANSFER ALGORITHM HERE*********************
 		**********************************************************************/
-		if (!cellEmpty) newPlayer = this.board.transfer(move, player, convertBoard(board));
-		/**********************************************************************
-		**********************CALL TRANSFER ALGORITHM HERE*********************
-		**********************************************************************/
-		
+
+
 		else {
 			moveValueArray[0] = -9999;
 			moveValueArray[1] = -9999;
@@ -234,4 +232,9 @@ class KalahAlgorithm{
 		}
 		return moveValueArray;
 	}
+
+    public static void main(String[] args) {
+        Player ai = new Player(1);
+
+    }
 }
