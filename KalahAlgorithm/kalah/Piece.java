@@ -32,7 +32,6 @@ public class Piece {
 	 */
 	public void putItem(Seed item) {
 		this.seeds.push(item);
-		throw new UnsupportedOperationException();
 	}
 
 	public int getId() {
@@ -48,6 +47,7 @@ public class Piece {
 	}
 
 	public int getCount() {
+			return this.seeds.size();
         return this.seeds.size();
 	}
 

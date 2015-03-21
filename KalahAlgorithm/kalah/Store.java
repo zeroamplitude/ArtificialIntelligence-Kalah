@@ -25,7 +25,6 @@ public class Store extends Piece {
 	public Seed getItem() {
 		if (seeds.isEmpty()) return null;
 		else return seeds.pop();
-		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -36,7 +35,6 @@ public class Store extends Piece {
 	public boolean isEmpty() {
 		if (seeds.size() == 0) return true;
 		else return false;
-		throw new UnsupportedOperationException();
 	}
 
 }
