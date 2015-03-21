@@ -22,7 +22,8 @@ public class Store extends Piece {
 	 * @return An object that represents a seed in the game kalah.
 	 */
 	public Seed getItem() {
-		// TODO - implement Store.getItem
+		if (seeds.isEmpty()) return null;
+		else return seeds.pop();
 		throw new UnsupportedOperationException();
 	}
 
@@ -32,7 +33,8 @@ public class Store extends Piece {
 	 * @return true if the source piece is empty, otherwise false
 	 */
 	public boolean isEmpty() {
-		// TODO - implement Store.isEmpty
+		if (seeds.size() == 0) return true;
+		else return false;
 		throw new UnsupportedOperationException();
 	}
 
