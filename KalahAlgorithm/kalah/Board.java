@@ -44,7 +44,7 @@ public class Board {
                 // push seeds to the stack
                 for (int j = 0; j < 3; j++)
                     seeds.push(new Seed(count));
-                //
+                // add a store to the map with 3 seeds
                 pieces.put(i, new Store(i, owner, seeds));
             }
         }
@@ -56,8 +56,12 @@ public class Board {
 	 * @return A boolean object that represents if the game is over
 	 */
 	public boolean isGameOver() {
-		// TODO - implement Board.isGameOver
-		throw new UnsupportedOperationException();
+        boolean pl = false;
+        boolean pl2
+        for(Piece cur : pieces)
+            if(cur.getClass() == Store.class)
+                if (cur.getCount() == 0)
+
 	}
 
 	/**
