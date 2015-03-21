@@ -1,6 +1,3 @@
-package kalah;
-
-import kalah.Board;
 
 /**********************************************************************
 HOW TO RUN:
@@ -159,11 +156,11 @@ class KalahAlgorithm{
 		if (board[move] == 0) cellEmpty = true;
 
 		/**********************************************************************
-		CALL SIMULATION ALGORITHM HERE
+		**********************CALL TRANSFER ALGORITHM HERE*********************
 		**********************************************************************/
-		if (!cellEmpty) newPlayer = (move, player, board);
+		if (!cellEmpty) newPlayer = transfer(move, player, board);
 		/**********************************************************************
-		CALL SIMULATION ALGORITHM HERE
+		**********************CALL TRANSFER ALGORITHM HERE*********************
 		**********************************************************************/
 		
 		else {
