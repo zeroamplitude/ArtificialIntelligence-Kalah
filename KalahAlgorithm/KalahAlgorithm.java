@@ -19,6 +19,22 @@ class KalahAlgorithm{
 	}
 
 	/**********************************************************************
+	Converts the board to a format useable by the transfer function
+	**********************************************************************/
+	public int[] convertBoard(int[] currBoard){
+		int[] newBoard = new int[14]; 
+		for (int i = 0; i < 7; i ++){
+			newBoard[i] = currBoard[i]; 
+		}
+		newBoard[7] = currBoard[12];
+		newBoard[8] = currBoard[11];
+		newBoard[9] = currBoard[10];
+		newBoard[13] = currBoard[13];
+
+		return newBoard;
+	}
+
+	/**********************************************************************
 	sets the simBoard, the sim board is used by the get value of move class
 	to determine the score and win % of making a move
 	**********************************************************************/
@@ -155,7 +171,7 @@ class KalahAlgorithm{
 		/**********************************************************************
 		**********************CALL TRANSFER ALGORITHM HERE*********************
 		**********************************************************************/
-		if (!cellEmpty) newPlayer = transfer(move, player, board);
+		if (!cellEmpty) newPlayer = transfer(move, player, convertBoard(board);
 		/**********************************************************************
 		**********************CALL TRANSFER ALGORITHM HERE*********************
 		**********************************************************************/
