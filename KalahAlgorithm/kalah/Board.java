@@ -181,9 +181,23 @@ public class Board {
 
     public int[] convertToIntArray() {
         int[] tmp = new int[14];
+
         int i = 0;
-        for (Piece cur : pieces.values())
-            tmp[i] = cur.getCount();
+        int j = 12;
+
+        for (Piece cur : pieces.values()) {
+                tmp[i] = cur.getCount();
+            i++;
+        }
+
+        // adjust for Algorithms board
+        for (i = 7; i < j; i++) {
+            int tmpSwitch = tmp[i];
+            tmp[i] = tmp[j];
+            tmp[j] = tmpSwitch;
+            j--;
+        }
+
         return tmp;
     }
 
