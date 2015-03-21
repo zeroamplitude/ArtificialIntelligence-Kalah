@@ -11,9 +11,8 @@ public class House extends Piece {
 	 * 
 	 * @param seeds
 	 */
-	public House(Stack<Seeds> seeds) {
-		// TODO - implement House.House
-		throw new UnsupportedOperationException();
+	public House(int id, Stack<Seed> seeds) {
+        super(id, seeds);
 	}
 
 }
