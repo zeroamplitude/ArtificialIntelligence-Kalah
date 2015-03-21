@@ -1,5 +1,7 @@
 package kalah;
 
+import java.util.Stack;
+
 /**
  * This class represents a object that are pieces of the board.
  */
@@ -18,8 +20,7 @@ public class Piece {
 	 * @param seeds A stack of Seeds that represent the initial piece state
 	 */
 	public Piece(Stack<Seed> seeds) {
-		// TODO - implement Piece.Piece
-		throw new UnsupportedOperationException();
+		this.seeds = seeds;
 	}
 
 	/**
