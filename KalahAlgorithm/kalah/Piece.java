@@ -45,7 +45,7 @@ public class Piece {
 	}
 
 	public int getCount() {
-		// TODO - implement Piece.getCount
+			return this.seeds.size();
 		throw new UnsupportedOperationException();
 	}
 
