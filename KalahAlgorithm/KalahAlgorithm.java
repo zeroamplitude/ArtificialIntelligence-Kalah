@@ -6,6 +6,7 @@ HOW TO RUN:
 **********************************************************************/
 class KalahAlgorithm{
 	private int[] simBoard = new int[14];
+	private int playerID;
 
 
 
@@ -13,8 +14,8 @@ class KalahAlgorithm{
 	Basic constuctor to set the initial sate of the sim board when a new
 	instance of the kalah algorithm is created
 	**********************************************************************/
-	public KalahAlgorithm(int[] board){
-		simBoard = board;
+	public KalahAlgorithm(int player){
+		int playerID = player;
 	}
 
 	/**********************************************************************
@@ -81,23 +82,47 @@ class KalahAlgorithm{
 	public double[][] getMoveArray(int[] board){
 		double[][] moveArray = new double[3][6];
 		double[] moveValueArray = new double[3];
-		for (int i = 0; i < 6; i ++){
-			int temp = i + 1;
-			System.out.println("*************************************************************");
-			System.out.println("**********************  TRYING MOVE " + temp + "  **********************");
-			System.out.println("*************************************************************");
 
-			if (board[i] == 0){ 
-				moveArray[0][i] = -9999;
-				moveArray[1][i] = -9999;
-				moveArray[2][i] = -9999;
-			} else {
-				moveValueArray = this.getValueOfMove(i, 1, board);
+		if (this.playerID == 1){
+			for (int i = 0; i < 6; i ++){
+				int temp = i + 1;
+				System.out.println("*************************************************************");
+				System.out.println("**********************  TRYING MOVE " + temp + "  **********************");
+				System.out.println("*************************************************************");
 
-				moveArray[0][i] = moveValueArray[0];
-				moveArray[1][i] = moveValueArray[1];
-				moveArray[2][i] = moveValueArray[2];
+				if (board[i] == 0){ 
+					moveArray[0][i] = -9999;
+					moveArray[1][i] = -9999;
+					moveArray[2][i] = -9999;
+				} else {
+					moveValueArray = this.getValueOfMove(i, 1, board);
+
+					moveArray[0][i] = moveValueArray[0];
+					moveArray[1][i] = moveValueArray[1];
+					moveArray[2][i] = moveValueArray[2];
+				}
 			}
+		}else{
+			for (int i = 0; i < 6; i ++){
+				int temp = i + 1;
+				System.out.println("*************************************************************");
+				System.out.println("**********************  TRYING MOVE " + temp + "  **********************");
+				System.out.println("*************************************************************");
+
+				if (board[i + 7] == 0){ 
+					moveArray[0][i] = -9999;
+					moveArray[1][i] = -9999;
+					moveArray[2][i] = -9999;
+				} else {
+					moveValueArray = this.getValueOfMove(i, 2, board);
+
+					moveArray[0][i] = moveValueArray[0];
+					moveArray[1][i] = moveValueArray[1];
+					moveArray[2][i] = moveValueArray[2];
+				}
+			}
+
+
 		}
 
 		System.out.println("getMoveArray RETURNING: ");
@@ -152,11 +177,19 @@ class KalahAlgorithm{
 		// if the game is over return the score and w/l of the game
 		if(gameOver){
 			System.out.println("GAME IS OVER");
-			moveValueArray[0] = simBoard[6] - simBoard[13];
-			if (simBoard[6] > simBoard[13]) moveValueArray[1] = 1;
-			else if (simBoard[6] == simBoard[13]) moveValueArray[1] = 0.5;
-			else moveValueArray[1] = 0;
-			moveValueArray[2] = 1;
+			if (this.playerID == 1){
+				moveValueArray[0] = simBoard[6] - simBoard[13];
+				if (simBoard[6] > simBoard[13]) moveValueArray[1] = 1;
+				else if (simBoard[6] == simBoard[13]) moveValueArray[1] = 0.5;
+				else moveValueArray[1] = 0;
+				moveValueArray[2] = 1;
+			}else {
+				moveValueArray[0] = simBoard[13] - simBoard[6];
+				if (simBoard[13] > simBoard[6]) moveValueArray[1] = 1;
+				else if (simBoard[13] == simBoard[6]) moveValueArray[1] = 0.5;
+				else moveValueArray[1] = 0;
+				moveValueArray[2] = 1;
+			}
 		}else {
 			System.out.println("GAME IS NOT OVER");
 			if (newPlayer == 1){
