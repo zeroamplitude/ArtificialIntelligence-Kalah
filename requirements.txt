@@ -1,0 +1,3 @@
+JPype==0.5.4.2
+PodSixNet==78
+pygame==1.9.2a0
