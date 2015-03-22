@@ -11,7 +11,7 @@ echo ${SRCDIR}
 echo ${BUILDDIR}
 
 if ! [ -d ${BUILDDIR} ]; then
-    mkdir build
+    mkdir ${PROJECTDIR}/build
     echo "making build directory.."
 fi
 
