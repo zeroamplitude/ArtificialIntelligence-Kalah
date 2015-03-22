@@ -1,3 +1,12 @@
 Hey Nick, hows it going?, you on skype?
  yea
  
+peter my number is 647 274 0204 
+
+im going home now.. I made some changes and integrated the systems. 
+
+I have some scripts that will compile and run the program.
+
+I have not finished the install script which will install all dependencies.
+
+Try to compile and run it. You may be able to fix the dependencies easily.. if not let me know.
