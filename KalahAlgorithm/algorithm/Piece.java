@@ -1,4 +1,4 @@
-package kalah;
+package algorithm;
 
 import java.util.Stack;
 

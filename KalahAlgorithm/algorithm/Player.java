@@ -1,11 +1,11 @@
-package kalah;
+package algorithm;
 
 /**********************************************************************
 HOW TO RUN:
 - create instance of Kalah algorithm
 - call makePlay and pass it the current simBoard
 **********************************************************************/
-class Player {
+public class Player {
 
     /**
      * An array of integers representing the current board
@@ -241,6 +241,7 @@ class Player {
 
     public static void main(String[] args) {
         Player ai = new Player(1);
+
 
     }
 }

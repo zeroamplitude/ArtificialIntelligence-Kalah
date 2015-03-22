@@ -1,4 +1,4 @@
-package kalah;
+package algorithm;
 
 /**
  * This class represents a seed in kalah. A seed is the items that

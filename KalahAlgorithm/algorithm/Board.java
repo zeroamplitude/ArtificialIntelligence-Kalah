@@ -1,4 +1,4 @@
-package kalah;
+package algorithm;
 
 import java.util.*;
 
@@ -176,7 +176,7 @@ public class Board {
         if(isGameOver())
             turn = 0;
 
-        algorithm.setSimBoard(convertToIntArray());
+        algorithm.setTmpBoard(convertToIntArray());
         return turn;
 	}
 
