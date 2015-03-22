@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class Board {
 
-    private KalahAlgorithm algorithm;
+    private Player algorithm;
 
 	/**
 	 * A map of type key, int, and value, piece, which represents
@@ -28,8 +28,9 @@ public class Board {
 	/**
 	 * This is the default constructor for the Board class.This will set the
 	 * board to it's initial game state.
-	 */
-	public Board(KalahAlgorithm algorithm) {
+     * @param algorithm
+     */
+	public Board(Player algorithm) {
         this.turn = 1;
 
         // create a reference to the algorithm
@@ -190,7 +191,7 @@ public class Board {
             i++;
         }
 
-        // adjust for Algorithms board
+        // adjust for Players board
         for (i = 7; i < j; i++) {
             int tmpSwitch = tmp[i];
             tmp[i] = tmp[j];
@@ -202,8 +203,17 @@ public class Board {
     }
 
     public void setBoard(int[] board) {
-        this.pieces.clear();
+        // adjust for Algorithms board
+        int j = 12;
+        for (int i = 7; i < j; i++) {
+            int tmp = board[i];
+            board[i] = board[j];
+            board[j] = tmp;
+            j--;
+        }
 
+        this.pieces.clear();
+        int count = 0;
         for (int i = 0; i < 14; i++) {
             int owner;
             if (i < 7)
@@ -211,10 +221,11 @@ public class Board {
             else
                 owner = 2;
 
-            int count = 0;
             Stack<Seed> tmp = new Stack<Seed>();
-            for (int j = 0; j < board[i]; j++)
+            for (j = 0; j < board[i]; j++) {
                 tmp.push(new Seed(count));
+                count++;
+            }
 
             if (i == 6 || i == 13)
                 this.pieces.put(i, new House(i, owner, tmp));
