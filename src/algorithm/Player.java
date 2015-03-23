@@ -112,9 +112,9 @@ public class Player {
 				System.out.println("*************************************************************");
 				System.out.println("**********************  TRYING MOVE " + temp + "  **********************");
 				System.out.println("*************************************************************");
-				System.out.println("GET MOVE ARRAY TEST1");
 
 				if (originalBoard[i] == 0){
+                    System.out.println("NOT A VALID MOVE");
 					moveArray[0][i] = -9999;
 					moveArray[1][i] = -9999;
 					moveArray[2][i] = -9999;
@@ -174,7 +174,7 @@ public class Player {
 		double[] tempArray;
 		int[] newBoard;
 		int newPlayer = -1;
-		System.out.println("GET VALUE OF MOVE TEST1");
+		System.out.println("GET VALUE OF MOVE TEST 1");
 		//if (player == 2) move += 7;
 		if (currBoard[move] == 0) cellEmpty = true;
 
