@@ -73,4 +73,11 @@ public class PlayerTest {
     public void testMain() throws Exception {
 
     }
+
+    @Test
+    public void testPrintBoard() throws Exception {
+        int[] testBoard = new int[] { 0, 0, 0, 1, 0, 0, 0,
+                0, 0, 0, 0, 1, 0, 0};
+        player.printBoard(testBoard);
+    }
 }
