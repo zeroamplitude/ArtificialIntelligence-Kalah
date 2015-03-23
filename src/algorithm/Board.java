@@ -112,6 +112,7 @@ public class Board {
 	public int transfer(int source, int player, int[] board) {
         setBoard(board);
 
+
         // source to board keys
         source -= 1;
         if (player == 2)
@@ -120,7 +121,16 @@ public class Board {
         Store origin = (Store) this.pieces.get(source);
         int destIndex = source + 1;
 
+
+        System.out.println("****************************************************");
+        System.out.println("***********************TEST 1*************************");
+        System.out.println("****************************************************");
+
         for (int i = 0; i < origin.getCount(); i++) {
+
+            System.out.println("****************************************************");
+            System.out.println("***********************TEST 2*************************");
+            System.out.println("****************************************************");
             Seed seed = origin.getItem();
 
             // skip opponents home
@@ -136,6 +146,7 @@ public class Board {
 
             // put the seed into the piece
             dest.putItem(seed);
+
 
             // check if that was the last seed
             if (i == 1 - origin.getCount()) {
@@ -171,6 +182,12 @@ public class Board {
             }
             destIndex ++;
         }
+
+        System.out.println("****************************************************");
+        System.out.println("***********************TEST 3*************************");
+        System.out.println("****************************************************");
+
+
 
         // check is game is over
         if(isGameOver())

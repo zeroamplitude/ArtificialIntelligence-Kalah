@@ -47,7 +47,7 @@ public class Piece {
 	}
 
 	public int getCount() {
-        return seeds.size();
+		int count = this.seeds.size(); return count;
 	}
 
     /**

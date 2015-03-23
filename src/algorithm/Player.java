@@ -45,6 +45,7 @@ public class Player {
 	to determine the score and win % of making a move
 	**********************************************************************/
 	public void setTmpBoard(int[] boardFromTransfer){
+		System.out.println("SETTING TMP BOARD");
         this.tmpBoard = boardFromTransfer;
 	}
 
@@ -111,6 +112,7 @@ public class Player {
 				System.out.println("*************************************************************");
 				System.out.println("**********************  TRYING MOVE " + temp + "  **********************");
 				System.out.println("*************************************************************");
+				System.out.println("GET MOVE ARRAY TEST1");
 
 				if (originalBoard[i] == 0){
 					moveArray[0][i] = -9999;
@@ -130,6 +132,7 @@ public class Player {
 				System.out.println("*************************************************************");
 				System.out.println("**********************  TRYING MOVE " + temp + "  **********************");
 				System.out.println("*************************************************************");
+				System.out.println("GET MOVE ARRAY TEST12");
 
 				if (originalBoard[i + 7] == 0){
 					moveArray[0][i] = -9999;
@@ -171,7 +174,7 @@ public class Player {
 		double[] tempArray;
 		int[] newBoard;
 		int newPlayer = -1;
-
+		System.out.println("GET VALUE OF MOVE TEST1");
 		if (player == 2) move += 7;
 		if (currBoard[move] == 0) cellEmpty = true;
 
