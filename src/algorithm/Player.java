@@ -134,15 +134,15 @@ public class Player {
 				System.out.println("GET MOVE ARRAY TEST12");
 
 				if (originalBoard[i] == 0){
-					moveArray[0][i] = -9999;
-					moveArray[1][i] = -9999;
-					moveArray[2][i] = -9999;
+					moveArray[0][i-7] = -9999;
+					moveArray[1][i-7] = -9999;
+					moveArray[2][i-7] = -9999;
 				} else {
 					moveValueArray = this.getValueOfMove(i, 2, originalBoard);
 
-					moveArray[0][i] = moveValueArray[0];
-					moveArray[1][i] = moveValueArray[1];
-					moveArray[2][i] = moveValueArray[2];
+					moveArray[0][i-7] = moveValueArray[0];
+					moveArray[1][i-7] = moveValueArray[1];
+					moveArray[2][i-7] = moveValueArray[2];
 				}
 			}
 
