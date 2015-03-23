@@ -229,7 +229,9 @@ public class Player {
 			if (newPlayer == 1){
 				for (int simMove = 0; simMove < 6; simMove ++){
 					int temp = simMove + 1;
-					System.out.println("TRYING MOVE: " + temp);
+                    System.out.println("*************************************************************");
+                    System.out.println("**********************  TRYING MOVE " + temp + "  **********************");
+                    System.out.println("*************************************************************");
 					tempArray = getValueOfMove(simMove, newPlayer, newBoard);
 					if (tempArray[0] == -9999) moveValueArray[0] += tempArray[0];
 					if (tempArray[1] == -9999) moveValueArray[1] += tempArray[1];
@@ -238,7 +240,9 @@ public class Player {
 			} else{
 				for (int simMove = 7; simMove < 13; simMove ++){
 					int temp = simMove + 1;
-					System.out.println("TRYING MOVE: " + temp);
+                    System.out.println("*************************************************************");
+                    System.out.println("**********************  TRYING MOVE " + temp + "  **********************");
+                    System.out.println("*************************************************************");
 					tempArray = getValueOfMove(simMove, newPlayer, newBoard);
 					if (tempArray[0] == -9999) moveValueArray[0] += tempArray[0];
 					if (tempArray[1] == -9999) moveValueArray[1] += tempArray[1];

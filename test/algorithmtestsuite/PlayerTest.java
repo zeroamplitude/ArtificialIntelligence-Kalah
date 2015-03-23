@@ -56,7 +56,7 @@ public class PlayerTest {
     public void testMakePlay2() throws Exception {
         int[] testBoard = new int[] { 0, 0, 0, 1, 0, 0, 0,
                 0, 0, 0, 0, 1, 0, 0};
-        assertEquals(2,player.makePlay(testBoard));
+        assertEquals(4,player.makePlay(testBoard));
     }
 
     @Test
