@@ -45,7 +45,6 @@ public class Player {
 	to determine the score and win % of making a move
 	**********************************************************************/
 	public void setTmpBoard(int[] boardFromTransfer){
-		System.out.println("SETTING TMP BOARD");
         this.tmpBoard = boardFromTransfer;
 	}
 
@@ -178,12 +177,17 @@ public class Player {
 		//if (player == 2) move += 7;
 		if (currBoard[move] == 0) cellEmpty = true;
 
+        System.out.println("CURRENT BOARD BEFORE TRANSFER");
+        for (int p = 0; p < 14; p++){
+            System.out.print("|" + currBoard[p]);
+        }
+        System.out.print("\n");
 
         /**********************************************************************
 		**********************CALL TRANSFER ALGORITHM HERE*********************
 		**********************************************************************/
-		System.out.println("CALLING NICKS FUNCTION HERE");
-		if (!cellEmpty){ 
+		if (!cellEmpty){
+            System.out.println("TRANSFER MOVE: " + move + " PLAYER: " + player);
 			newPlayer = this.simBoard.transfer(move, player,currBoard);
 			newBoard = this.tmpBoard;
 		}
@@ -198,7 +202,6 @@ public class Player {
 			moveValueArray[2] = -9999;
 			return moveValueArray;
 		}
-		System.out.println("PAST NICKS FUNCTION HERE");
 
 
 		int sum = 0;
