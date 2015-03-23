@@ -178,10 +178,7 @@ public class Player {
 		if (currBoard[move] == 0) cellEmpty = true;
 
         System.out.println("CURRENT BOARD BEFORE TRANSFER");
-        for (int p = 0; p < 14; p++){
-            System.out.print("|" + currBoard[p]);
-        }
-        System.out.print("\n");
+        printBoard(currBoard);
 
         /**********************************************************************
 		**********************CALL TRANSFER ALGORITHM HERE*********************
@@ -212,10 +209,7 @@ public class Player {
 		if (sum == 0) gameOver = true;
 
         System.out.println("CURRENT BOARD AFTER TRANSFER");
-        for (int p = 0; p < 14; p++){
-            System.out.print("|" + newBoard[p]);
-        }
-        System.out.print("\n");
+        printBoard(newBoard);
 		// if the game is over return the score and w/l of the game
 		if(gameOver){
 			System.out.println("GAME IS OVER");
@@ -241,7 +235,10 @@ public class Player {
                     System.out.println("**********************  TRYING MOVE " + temp + "  **********************");
                     System.out.println("*************************************************************");
 					tempArray = getValueOfMove(simMove, newPlayer, newBoard);
-					if (tempArray[0] == -9999) moveValueArray[0] += tempArray[0];
+					if (tempArray[0] == -9999) {
+                        moveValueArray[0] += tempArray[0];
+                        System.out.println("INVALID MOVE");
+                    }
 					if (tempArray[1] == -9999) moveValueArray[1] += tempArray[1];
 					if (tempArray[2] == -9999) moveValueArray[2] += tempArray[2];
 				}
@@ -252,7 +249,10 @@ public class Player {
                     System.out.println("**********************  TRYING MOVE " + temp + "  **********************");
                     System.out.println("*************************************************************");
 					tempArray = getValueOfMove(simMove, newPlayer, newBoard);
-					if (tempArray[0] == -9999) moveValueArray[0] += tempArray[0];
+					if (tempArray[0] == -9999){
+                        moveValueArray[0] += tempArray[0];
+                        System.out.println("INVALID MOVE");
+                    }
 					if (tempArray[1] == -9999) moveValueArray[1] += tempArray[1];
 					if (tempArray[2] == -9999) moveValueArray[2] += tempArray[2];
 				}
