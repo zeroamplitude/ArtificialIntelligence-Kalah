@@ -10,7 +10,7 @@ public class Player {
     /**
      * An array of integers representing the current board
      */
-	private int[] board;
+	private int[] originalBoard;
 
     /**
      * An integer that represents the players id. id can be either 1 or 2.
@@ -35,7 +35,7 @@ public class Player {
 	**********************************************************************/
 	public Player(int player){
         this.playerID = player;
-        this.board = new int[14];
+        this.originalBoard = new int[14];
         this.tmpBoard  = new int[14];
         this.simBoard = new Board(this);
 	}
@@ -44,8 +44,8 @@ public class Player {
 	sets the board, the sim simBoard is used by the get value of move class
 	to determine the score and win % of making a move
 	**********************************************************************/
-	public void setTmpBoard(int[] simBoard){
-        board = simBoard;
+	public void setTmpBoard(int[] boardFromTransfer){
+        this.tmpBoard = boardFromTransfer;
 	}
 
 	/**********************************************************************
@@ -53,8 +53,8 @@ public class Player {
 	determines what is the best move
 	returns best move (0-6)
 	**********************************************************************/
-	public int makePlay(int[] simBoard){
-		double[][] movesArray = getMoveArray(simBoard);
+	public int makePlay(int[] originalBoard){
+		double[][] movesArray = getMoveArray(originalBoard);
 		int[] scoreArray = new int[6];
 		double bestWinRatio = -9999;
 		int bestMove = 0;
@@ -101,7 +101,7 @@ public class Player {
 	returns an array of length 3 that represents the value of the move
 	moveArray[1]: holds the score difference between player 
 	**********************************************************************/
-	public double[][] getMoveArray(int[] simBoard){
+	public double[][] getMoveArray(int[] originalBoard){
 		double[][] moveArray = new double[3][6];
 		double[] moveValueArray = new double[3];
 
@@ -112,12 +112,12 @@ public class Player {
 				System.out.println("**********************  TRYING MOVE " + temp + "  **********************");
 				System.out.println("*************************************************************");
 
-				if (simBoard[i] == 0){
+				if (originalBoard[i] == 0){
 					moveArray[0][i] = -9999;
 					moveArray[1][i] = -9999;
 					moveArray[2][i] = -9999;
 				} else {
-					moveValueArray = this.getValueOfMove(i, 1, simBoard);
+					moveValueArray = this.getValueOfMove(i, 1, originalBoard);
 
 					moveArray[0][i] = moveValueArray[0];
 					moveArray[1][i] = moveValueArray[1];
@@ -131,12 +131,12 @@ public class Player {
 				System.out.println("**********************  TRYING MOVE " + temp + "  **********************");
 				System.out.println("*************************************************************");
 
-				if (simBoard[i + 7] == 0){
+				if (originalBoard[i + 7] == 0){
 					moveArray[0][i] = -9999;
 					moveArray[1][i] = -9999;
 					moveArray[2][i] = -9999;
 				} else {
-					moveValueArray = this.getValueOfMove(i, 2, simBoard);
+					moveValueArray = this.getValueOfMove(i, 2, originalBoard);
 
 					moveArray[0][i] = moveValueArray[0];
 					moveArray[1][i] = moveValueArray[1];
@@ -164,21 +164,26 @@ public class Player {
 	the number of possible win that move can allow, and the number of
 	possible outcomes possible.
 	**********************************************************************/
-	public double[] getValueOfMove(int move, int player, int[] simBoard){
+	public double[] getValueOfMove(int move, int player, int[] currBoard){
 		boolean cellEmpty = false;
 		boolean gameOver = false;
 		double[] moveValueArray = new double[3];
 		double[] tempArray;
+		int[] newBoard;
 		int newPlayer = -1;
 
 		if (player == 2) move += 7;
-		if (simBoard[move] == 0) cellEmpty = true;
+		if (currBoard[move] == 0) cellEmpty = true;
 
 
         /**********************************************************************
 		**********************CALL TRANSFER ALGORITHM HERE*********************
 		**********************************************************************/
-		if (!cellEmpty) newPlayer = this.simBoard.transfer(move, player,simBoard);
+		System.out.println("CALLING NICKS FUNCTION HERE");
+		if (!cellEmpty){ 
+			newPlayer = this.simBoard.transfer(move, player,currBoard);
+			newBoard = this.tmpBoard;
+		}
 		/**********************************************************************
 		**********************CALL TRANSFER ALGORITHM HERE*********************
 		**********************************************************************/
@@ -190,10 +195,12 @@ public class Player {
 			moveValueArray[2] = -9999;
 			return moveValueArray;
 		}
+		System.out.println("PAST NICKS FUNCTION HERE");
+
 
 		int sum = 0;
 		for(int i = 0; i < 13; i ++){
-			if (i != 6) sum += board[i];
+			if (i != 6) sum += newBoard[i];
 		}
 
 		if (sum == 0) gameOver = true;
@@ -202,15 +209,15 @@ public class Player {
 		if(gameOver){
 			System.out.println("GAME IS OVER");
 			if (this.playerID == 1){
-				moveValueArray[0] = board[6] - board[13];
-				if (board[6] > board[13]) moveValueArray[1] = 1;
-				else if (board[6] == board[13]) moveValueArray[1] = 0.5;
+				moveValueArray[0] = newBoard[6] - newBoard[13];
+				if (newBoard[6] > newBoard[13]) moveValueArray[1] = 1;
+				else if (newBoard[6] == newBoard[13]) moveValueArray[1] = 0.5;
 				else moveValueArray[1] = 0;
 				moveValueArray[2] = 1;
 			}else {
-				moveValueArray[0] = board[13] - board[6];
-				if (board[13] > board[6]) moveValueArray[1] = 1;
-				else if (board[13] == board[6]) moveValueArray[1] = 0.5;
+				moveValueArray[0] = newBoard[13] - newBoard[6];
+				if (newBoard[13] > newBoard[6]) moveValueArray[1] = 1;
+				else if (newBoard[13] == newBoard[6]) moveValueArray[1] = 0.5;
 				else moveValueArray[1] = 0;
 				moveValueArray[2] = 1;
 			}
@@ -220,7 +227,7 @@ public class Player {
 				for (int simMove = 0; simMove < 6; simMove ++){
 					int temp = simMove + 1;
 					System.out.println("TRYING MOVE: " + temp);
-					tempArray = getValueOfMove(simMove, newPlayer, board);
+					tempArray = getValueOfMove(simMove, newPlayer, newBoard);
 					if (tempArray[0] == -9999) moveValueArray[0] += tempArray[0];
 					if (tempArray[1] == -9999) moveValueArray[1] += tempArray[1];
 					if (tempArray[2] == -9999) moveValueArray[2] += tempArray[2];
@@ -229,7 +236,7 @@ public class Player {
 				for (int simMove = 7; simMove < 13; simMove ++){
 					int temp = simMove + 1;
 					System.out.println("TRYING MOVE: " + temp);
-					tempArray = getValueOfMove(simMove, newPlayer, board);
+					tempArray = getValueOfMove(simMove, newPlayer, newBoard);
 					if (tempArray[0] == -9999) moveValueArray[0] += tempArray[0];
 					if (tempArray[1] == -9999) moveValueArray[1] += tempArray[1];
 					if (tempArray[2] == -9999) moveValueArray[2] += tempArray[2];

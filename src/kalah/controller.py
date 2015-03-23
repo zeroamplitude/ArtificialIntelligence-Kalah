@@ -25,6 +25,7 @@ class AIControl:
     def get_move(self, board):
         tmp = []
         for b in board.values():
+            print(len(b.seeds))
             tmp.append(len(b.seeds))
         select = self.java_move.makeMove(tmp)
         # print(select)
