@@ -82,14 +82,13 @@ public class Board {
         boolean pl2 = true;
         for(Piece cur : pieces.values()) {
             if (cur.getClass() == Store.class && cur.getCount() != 0) {
-                if (cur.getOwner() == 1)
+                if (cur.getOwner() == 1 && pl1)
                     pl1 = false;
-                if (cur.getOwner() == 2)
+                if (cur.getOwner() == 2 && pl2)
                     pl2 = false;
             }
         }
-
-        return pl1 && pl2;
+        return pl1 || pl2;
 	}
 
 	/**
@@ -142,7 +141,7 @@ public class Board {
 
 
             // check if that was the last seed
-            if (i == 1 - origin.getCount()) {
+            if (origin.getCount() == 0) {
                 // check if cur/des is a store
                 if (dest.getClass() == Store.class) {
                     // check that the player owns the store
@@ -153,15 +152,16 @@ public class Board {
                             Store tmp = (Store) pieces.get(destIndex + (6 - destIndex) * 2);
                             // check if the across piece is greater than 0
                             if (tmp.getCount() > 0) {
+                                House plHome = (House) pieces.get(player * 7 - 1);
                                 // transfer all seeds from across into players home
                                 for (int j = 0; j < dest.getCount(); j++) {
-                                    home[player - 1].putItem(tmp.getItem());
+                                    plHome.putItem(tmp.getItem());
                                 }
                                 // transfer all seeds from dest into players home
                                 for (int j = 0; j < tmp.getCount(); j++){
                                     // cast dest to a store
                                     tmp = (Store) dest;
-                                    home[player - 1].putItem(tmp.getItem());
+                                    plHome.putItem(tmp.getItem());
                                 }
                             }
                         }
@@ -180,8 +180,10 @@ public class Board {
 
 
         // check is game is over
-        if(isGameOver())
+        if(isGameOver()) {
+            clear();
             turn = 0;
+        }
 
         algorithm.setTmpBoard(convertToIntArray());
         return turn;
@@ -191,7 +193,9 @@ public class Board {
         for (Piece p : this.pieces.values()){
             if (p.getClass() == Store.class) {
                 Store tmp = (Store) p;
-                home[tmp.getOwner()].putItem(tmp.getItem());
+                House plHome = (House) pieces.get(tmp.getOwner()*7-1);
+                for (int i = 0; i < tmp.getCount(); i++)
+                    plHome.putItem(tmp.getItem());
             }
         }
     }
