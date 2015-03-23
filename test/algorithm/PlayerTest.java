@@ -1,4 +1,4 @@
-package algorithmtestsuite;
+package algorithm;
 
 import algorithm.Player;
 import org.junit.After;
