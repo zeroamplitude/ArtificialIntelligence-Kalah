@@ -54,9 +54,52 @@ public class PlayerTest {
 
     @Test
     public void testMakePlay2() throws Exception {
+        //should be player 1
         int[] testBoard = new int[] { 0, 0, 0, 1, 0, 0, 0,
                 0, 0, 0, 0, 1, 0, 0};
+        //Expected move percentage array: x,x,x,100,x,x
+        //Expected score diference array: x,x,x, 2 ,x,x
+        assertEquals(4, player.makePlay(testBoard));
+    }
+
+    @Test
+    public void testMakePlay2b() throws Exception {
+        //should be player 2
+        int[] testBoard = new int[] { 0, 0, 0, 1, 0, 0, 0,
+                0, 0, 0, 0, 1, 0, 0};
+        //Expected move percentage array: x,x,x,x,100,x
+        //Expected score diference array: x,x,x,x, 2 ,x
+        assertEquals(5, player.makePlay(testBoard));
+    }
+
+    @Test
+    public void testMakePlay3() throws Exception {
+        //should be player 1
+        int[] testBoard = new int[] { 0, 3, 4, 0, 0, 0, 0,
+                0, 0, 0, 0, 1, 0, 0};
+        //Expected move percentage array: x,100,100,x,x,x
+        //Expected score diference array: x, 8 , 6 ,x,x,x
         assertEquals(4,player.makePlay(testBoard));
+    }
+
+    @Test
+    public void testMakePlay3b() throws Exception {
+        //should be player 2
+        int[] testBoard = new int[] { 0, 1, 0, 0, 0, 0, 0,
+                0, 0, 0, 4, 3, 0, 0};
+        //Expected move percentage array: x,x,x,100,100,x
+        //Expected score diference array: x,x,x, 6 , 8 ,x
+        assertEquals(5,player.makePlay(testBoard));
+    }
+
+    @Test
+    public void testMakePlay4() throws Exception {
+        //should be player 1
+        int[] testBoard = new int[] { 0, 0, 1, 0, 0, 1, 0,
+                1, 0, 0, 2, 0, 0, 0};
+        //Expected move percentage array: x,x,100,x,x,100
+        //Expected score diference array: x,x, 4 ,x,x, 4
+        assertEquals(3,player.makePlay(testBoard));
     }
 
     @Test
