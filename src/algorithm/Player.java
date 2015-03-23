@@ -63,7 +63,7 @@ public class Player {
 		System.out.println("*************************************************************");
 		System.out.println("********************  ANALYSIS COMPLETE  ********************");
 		System.out.println("*************************************************************");
-
+        printBoard(originalBoard);
 		// Caluculate the best move given the score and the win % of each move
 		System.out.println("WIN PERCENTAGE ARRAY: ");
 		for (int i = 0; i < 6; i ++){
@@ -262,11 +262,11 @@ public class Player {
 	}
 
     public void printBoard(int[] board) {
-        System.out.printf("+-------+------+------+------+------+------+------+------+");
-        System.out.printf("|       | %02d | %02d | %02d | %02d | %02d | %02d |      |", board[7], board[8], board[9], board[10], board[11], board[12]);
-        System.out.printf("| %02d  |------+------+------+------+------+------| %02d |", board[13], board[6]);
-        System.out.printf("|       | %02d | %02d | %02d | %02d | %02d | %02d |      |", board[0], board[1], board[2], board[3], board[4], board[5]);
-        System.out.printf("+-------+------+------+------+------+------+------+------+");
+        System.out.printf("+-------+------+------+------+------+------+------+------+\n");
+        System.out.printf("|       | %02d | %02d | %02d | %02d | %02d | %02d |      |\n", board[7], board[8], board[9], board[10], board[11], board[12]);
+        System.out.printf("| %02d  |------+------+------+------+------+------| %02d |\n", board[13], board[6]);
+        System.out.printf("|       | %02d | %02d | %02d | %02d | %02d | %02d |      |\n", board[0], board[1], board[2], board[3], board[4], board[5]);
+        System.out.printf("+-------+------+------+------+------+------+------+------+\n");
     }
 
     public static void main(String[] args) {
