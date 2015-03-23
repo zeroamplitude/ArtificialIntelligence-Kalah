@@ -121,16 +121,10 @@ public class Board {
         int destIndex = source + 1;
 
 
-        System.out.println("****************************************************");
-        System.out.println("***********************TEST 1*************************");
-        System.out.println("****************************************************");
 
         for (int i = 0; i < origin.getCount(); i++) {
 
-            System.out.println("****************************************************");
-            System.out.println("***********************TEST 2*************************");
-            System.out.println("****************************************************");
-            Seed seed = origin.getItem();
+           Seed seed = origin.getItem();
 
             // skip opponents home
             if ( (destIndex == 6 && player == 2) || (destIndex == 13 && player == 1) )
@@ -182,9 +176,6 @@ public class Board {
             destIndex ++;
         }
 
-        System.out.println("****************************************************");
-        System.out.println("***********************TEST 3*************************");
-        System.out.println("****************************************************");
 
 
 
