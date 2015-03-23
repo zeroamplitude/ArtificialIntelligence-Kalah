@@ -114,7 +114,6 @@ public class Board {
 
 
         // source to board keys
-        source -= 1;
         if (player == 2)
             source += (6 - source) * 2;
 

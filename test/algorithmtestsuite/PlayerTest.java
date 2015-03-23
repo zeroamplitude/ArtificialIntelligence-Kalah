@@ -48,7 +48,8 @@ public class PlayerTest {
 
     @Test
     public void testMakePlay() throws Exception {
-        player.makePlay(board);
+        int[] b1 = new int[]{3,3,3,3,3,3,0,3,3,3,3,3,3,0};
+        player.makePlay(b1);
     }
 
     @Test
