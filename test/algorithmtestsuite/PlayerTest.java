@@ -12,22 +12,24 @@ import java.util.Collection;
 import java.util.Objects;
 
 import static org.junit.Assert.*;
-@RunWith(Parameterized.class)
+//@RunWith(Parameterized.class)
 public class PlayerTest {
     private int[] board;
     private Player player;
 
-    public PlayerTest(int[] board) {
-        this.board = board;
-    }
+//    public PlayerTest(int[] board) {
+//        this.board = board;
+//    }
 
-    @Parameterized.Parameters
-    public static Collection<Object[]> data() {
-        int[] b1 = new int[]{0,3,3,3,3,3,3,0,3,3,3,3,3,3,0};
-        return Arrays.asList(new Object[][] {
-                {b1}
-        });
-    }
+//    @Parameterized.Parameters
+//    public static Collection<Object[]> data() {
+//
+//        int[] b1 = new int[]{0,3,3,3,3,3,3,0,3,3,3,3,3,3,0};
+//
+//        return Arrays.asList(new Object[][] {
+//                {b1}
+//        });
+//    }
 
     @Before
     public void setUp() throws Exception {
