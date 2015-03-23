@@ -12,28 +12,61 @@ import java.util.Collection;
 import java.util.Objects;
 
 import static org.junit.Assert.*;
-//@RunWith(Parameterized.class)
+@RunWith(Parameterized.class)
 public class PlayerTest {
-    private int[] board;
+    private int[] testBoard;
+    private int exp;
+    private int pl;
     private Player player;
 
-//    public PlayerTest(int[] board) {
-//        this.board = board;
-//    }
+    public PlayerTest(int[] board, int pl, int exp) {
+        this.testBoard = board;
+        this.pl = pl;
+        this.exp = exp;
+    }
 
-//    @Parameterized.Parameters
-//    public static Collection<Object[]> data() {
-//
-//        int[] b1 = new int[]{0,3,3,3,3,3,3,0,3,3,3,3,3,3,0};
-//
-//        return Arrays.asList(new Object[][] {
-//                {b1}
-//        });
-//    }
+    @Parameterized.Parameters
+    public static Collection<Object[]> data() {
+//        int[] b1a = new int[]{0,3,3,3,3,3,3,0,3,3,3,3,3,3,0};
+        //Expected move percentage array: x,x,x,x,100,x
+        //Expected score diference array: x,x,x,x, 2 ,x
+        int[] b1a = new int[] { 0, 0, 0, 1, 0, 0, 0,
+                0, 0, 0, 0, 1, 0, 0};
+
+
+        //should be player 2
+        //Expected move percentage array: x,x,x,x,100,x
+        //Expected score diference array: x,x,x,x, 2 ,x
+        int[] b1b = new int[] { 0, 0, 0, 1, 0, 0, 0,
+                0, 0, 0, 0, 1, 0, 0};
+
+
+        //Expected move percentage array: x,100,100,x,x,x
+        //Expected score diference array: x, 8 , 6 ,x,x,x
+        int[] b2a = new int[] { 0, 3, 4, 0, 0, 0, 0,
+                0, 0, 0, 0, 1, 0, 0};
+
+
+        //should be player 2
+        //Expected move percentage array: x,x,x,100,100,x
+        //Expected score diference array: x,x,x, 6 , 8 ,x
+        int[] b2b = new int[] { 0, 1, 0, 0, 0, 0, 0,
+                0, 0, 0, 4, 3, 0, 0};
+
+
+
+        return Arrays.asList(new Object[][] {
+                //  board   player  exp
+                {   b1a,    1,      4},
+                {   b1b,    2,      5},
+                {   b2a,    1,      4},
+                {   b2b,    2,      5}
+        });
+    }
 
     @Before
     public void setUp() throws Exception {
-        player = new Player(1);
+        player = new Player(pl);
     }
 
     @After
@@ -42,14 +75,8 @@ public class PlayerTest {
     }
 
     @Test
-    public void testSetTmpBoard() throws Exception {
-
-    }
-
-    @Test
     public void testMakePlay() throws Exception {
-        int[] b1 = new int[]{3,3,3,3,3,3,0,3,3,3,3,3,3,0};
-        player.makePlay(b1);
+        assertEquals(exp, player.makePlay(testBoard));
     }
 
     @Test
@@ -89,7 +116,7 @@ public class PlayerTest {
                 0, 0, 0, 4, 3, 0, 0};
         //Expected move percentage array: x,x,x,100,100,x
         //Expected score diference array: x,x,x, 6 , 8 ,x
-        assertEquals(5,player.makePlay(testBoard));
+        assertEquals(5, player.makePlay(testBoard));
     }
 
     @Test
