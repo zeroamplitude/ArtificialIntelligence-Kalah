@@ -235,12 +235,11 @@ public class Player {
                     System.out.println("**********************  TRYING MOVE " + temp + "  **********************");
                     System.out.println("*************************************************************");
 					tempArray = getValueOfMove(simMove, newPlayer, newBoard);
-					if (tempArray[0] == -9999) {
-                        moveValueArray[0] += tempArray[0];
+                    if (tempArray[0] == -9999 && tempArray[1] == -9999 && tempArray[2] == -9999)
                         System.out.println("INVALID MOVE");
-                    }
-					if (tempArray[1] == -9999) moveValueArray[1] += tempArray[1];
-					if (tempArray[2] == -9999) moveValueArray[2] += tempArray[2];
+					if (tempArray[0] != -9999) moveValueArray[0] += tempArray[0];
+					if (tempArray[1] != -9999) moveValueArray[1] += tempArray[1];
+					if (tempArray[2] != -9999) moveValueArray[2] += tempArray[2];
 				}
 			} else{
 				for (int simMove = 7; simMove < 13; simMove ++){
@@ -249,12 +248,11 @@ public class Player {
                     System.out.println("**********************  TRYING MOVE " + temp + "  **********************");
                     System.out.println("*************************************************************");
 					tempArray = getValueOfMove(simMove, newPlayer, newBoard);
-					if (tempArray[0] == -9999){
-                        moveValueArray[0] += tempArray[0];
+                    if (tempArray[0] == -9999 && tempArray[1] == -9999 && tempArray[2] == -9999)
                         System.out.println("INVALID MOVE");
-                    }
-					if (tempArray[1] == -9999) moveValueArray[1] += tempArray[1];
-					if (tempArray[2] == -9999) moveValueArray[2] += tempArray[2];
+					if (tempArray[0] != -9999) moveValueArray[0] += tempArray[0];
+					if (tempArray[1] != -9999) moveValueArray[1] += tempArray[1];
+					if (tempArray[2] != -9999) moveValueArray[2] += tempArray[2];
 				}
 			}
 		}
