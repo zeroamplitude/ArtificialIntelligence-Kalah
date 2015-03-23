@@ -33,7 +33,7 @@ public class PlayerTest {
 
     @Before
     public void setUp() throws Exception {
-        player = new Player(1);
+        player = new Player(2);
     }
 
     @After
@@ -64,7 +64,6 @@ public class PlayerTest {
 
     @Test
     public void testMakePlay2b() throws Exception {
-        //should be player 2
         int[] testBoard = new int[] { 0, 0, 0, 1, 0, 0, 0,
                 0, 0, 0, 0, 1, 0, 0};
         //Expected move percentage array: x,x,x,x,100,x
