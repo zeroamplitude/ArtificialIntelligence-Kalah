@@ -196,6 +196,15 @@ public class Board {
         return turn;
 	}
 
+    public void clear() {
+        for (Piece p : this.pieces.values()){
+            if (p.getClass() == Store.class) {
+                Store tmp = (Store) p;
+                home[tmp.getOwner()].putItem(tmp.getItem());
+            }
+        }
+    }
+
     public int[] convertToIntArray() {
         int[] tmp = new int[14];
 
