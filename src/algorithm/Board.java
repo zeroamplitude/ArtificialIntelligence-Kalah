@@ -113,8 +113,18 @@ public class Board {
 
 
         // source to board keys
-        if (player == 2)
+        if (player == 2) {
             source += (6 - source) * 2;
+            // alter source if player 2
+            switch (source) {
+                case 7: source = 12; break;
+                case 8: source = 11; break;
+                case 9: source = 10; break;
+                case 10: source = 9; break;
+                case 11: source = 8; break;
+                case 12: source = 7; break;
+            }
+        }
 
         Store origin = (Store) this.pieces.get(source);
         int destIndex = source + 1;

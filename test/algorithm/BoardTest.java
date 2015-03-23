@@ -52,7 +52,9 @@ public class BoardTest {
 
     @Test
     public void testClear() throws Exception {
-
+        int[] b2 = new int[]{0,0,0,0,0,1,1,0,0,1,1,0,0,1};
+        board.clear();
+//        assertEquals(0, );
     }
 
     @Test
