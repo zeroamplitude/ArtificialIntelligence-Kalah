@@ -208,6 +208,11 @@ public class Player {
 
 		if (sum == 0) gameOver = true;
 
+        System.out.println("CURRENT BOARD AFTER TRANSFER");
+        for (int p = 0; p < 14; p++){
+            System.out.print("|" + newBoard[p]);
+        }
+        System.out.print("\n");
 		// if the game is over return the score and w/l of the game
 		if(gameOver){
 			System.out.println("GAME IS OVER");
