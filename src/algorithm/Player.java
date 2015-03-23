@@ -127,14 +127,14 @@ public class Player {
 				}
 			}
 		}else{
-			for (int i = 0; i < 6; i ++){
+			for (int i = 7; i < 13; i ++){
 				int temp = i + 1;
 				System.out.println("*************************************************************");
 				System.out.println("**********************  TRYING MOVE " + temp + "  **********************");
 				System.out.println("*************************************************************");
 				System.out.println("GET MOVE ARRAY TEST12");
 
-				if (originalBoard[i + 7] == 0){
+				if (originalBoard[i] == 0){
 					moveArray[0][i] = -9999;
 					moveArray[1][i] = -9999;
 					moveArray[2][i] = -9999;
@@ -175,7 +175,7 @@ public class Player {
 		int[] newBoard;
 		int newPlayer = -1;
 		System.out.println("GET VALUE OF MOVE TEST1");
-		if (player == 2) move += 7;
+		//if (player == 2) move += 7;
 		if (currBoard[move] == 0) cellEmpty = true;
 
 
