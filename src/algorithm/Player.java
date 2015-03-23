@@ -108,7 +108,8 @@ public class Player {
 		if (this.playerID == 1){
 			for (int i = 0; i < 6; i ++){
 				int temp = i + 1;
-				System.out.println("*************************************************************");
+                System.out.println("IN GET MOVE ARRAY 1");
+                System.out.println("*************************************************************");
 				System.out.println("**********************  TRYING MOVE " + temp + "  **********************");
 				System.out.println("*************************************************************");
 
@@ -127,11 +128,11 @@ public class Player {
 			}
 		}else{
 			for (int i = 7; i < 13; i ++){
-				int temp = i + 1;
+				int temp = i;
+                System.out.println("IN GET MOVE ARRAY 2");
 				System.out.println("*************************************************************");
 				System.out.println("**********************  TRYING MOVE " + temp + "  **********************");
 				System.out.println("*************************************************************");
-				System.out.println("GET MOVE ARRAY TEST12");
 
 				if (originalBoard[i] == 0){
 					moveArray[0][i-7] = -9999;
@@ -231,6 +232,7 @@ public class Player {
 			if (newPlayer == 1){
 				for (int simMove = 0; simMove < 6; simMove ++){
 					int temp = simMove + 1;
+                    System.out.println("IN GET VALUE OF MOVE 1");
                     System.out.println("*************************************************************");
                     System.out.println("**********************  TRYING MOVE " + temp + "  **********************");
                     System.out.println("*************************************************************");
@@ -243,7 +245,8 @@ public class Player {
 				}
 			} else{
 				for (int simMove = 7; simMove < 13; simMove ++){
-					int temp = simMove + 1;
+					int temp = simMove;
+                    System.out.println("IN GET VALUE OF MOVE 2");
                     System.out.println("*************************************************************");
                     System.out.println("**********************  TRYING MOVE " + temp + "  **********************");
                     System.out.println("*************************************************************");
