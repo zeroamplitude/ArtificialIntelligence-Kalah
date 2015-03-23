@@ -93,6 +93,16 @@ public class PlayerTest {
     }
 
     @Test
+    public void testMakePlay4() throws Exception {
+        //should be player 1
+        int[] testBoard = new int[] { 0, 0, 1, 0, 0, 1, 0,
+                1, 0, 0, 2, 0, 0, 0};
+        //Expected move percentage array: x,x,100,x,x,100
+        //Expected score diference array: x,x, 4 ,x,x, 4
+        assertEquals(3,player.makePlay(testBoard));
+    }
+
+    @Test
     public void testGetMoveArray() throws Exception {
 
     }
