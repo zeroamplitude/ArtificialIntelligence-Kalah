@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.assertArrayEquals;
 
 /**
  * SimulateTest:
@@ -37,8 +38,8 @@ public class SimulateTest {
 
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
-        int[] b     = new int[]{0,3,3,3,3,3,3,0,3,3,3,3,3,3,0};
-        int[] bExp  = new int[]{0,0,4,4,4,3,3,0,3,3,3,3,3,3,0};
+        int[] b     = new int[]{3,3,3,3,3,3,0,3,3,3,3,3,3,0};
+        int[] bExp  = new int[]{0,4,4,4,3,3,0,3,3,3,3,3,3,0};
 
 
         return Arrays.asList(new Object[][]{
@@ -58,14 +59,15 @@ public class SimulateTest {
 
     @Test
     public void testBoardAugmentation() throws Exception {
-        Field boardField = Player.class.getDeclaredField("simBoard");
+
+        Field boardField = player.getClass().getDeclaredField("simBoard");
         boardField.setAccessible(true);
 
-        Board board = (Board) boardField.get(boardField);
+        Board bb = (Board) boardField.get(player);
 
-        int[] tmp = board.convertToIntArray();
+        int[] tmp = bb.convertToIntArray();
 
-        assertEquals(bExp, tmp);
+        assertArrayEquals(bExp, tmp);
     }
 
 //    @AfterClass
