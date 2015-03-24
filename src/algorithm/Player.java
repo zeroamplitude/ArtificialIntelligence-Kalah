@@ -26,6 +26,8 @@ public class Player {
     public int makePlay(int[] board) {
         // set board
         this.board = board;
+        System.out.println("Before");
+        printBoard(board);
 
         Map<Integer, Integer[]> scores = simulateGame(playerID, board);
 
@@ -33,21 +35,6 @@ public class Player {
         int move = calcBestMove(scores);
 
         return move;
-    }
-
-    public Queue<Integer> getMoves(int[] board) {
-        Queue<Integer> moves = new LinkedList<Integer>();
-        for (int i = 0; i < 6; i++) {
-            int pieceIndex = i;
-            // adjust if player 2
-            if (playerID == 2)
-                pieceIndex = (6 - i) * 2;
-
-            // check if the piece has seeds
-            if (board[pieceIndex] > 0)
-                moves.add(i); // add the piece to potential moves
-        }
-        return moves;
     }
 
     public Map<Integer, Integer[]> simulateGame(int player, int[] board) {
@@ -72,6 +59,8 @@ public class Player {
             int turn = simulateMove(move, playerID, board);
 
             int[] tmpBoard = simBoard.convertToIntArray();
+            System.out.println("After piece: " + move);
+            printBoard(tmpBoard);
 
             // Base Case: game over
             if (turn == 0 || tmpBoard[6] > 18 || tmpBoard[13] > 18) {
@@ -87,6 +76,7 @@ public class Player {
                 // count game
                 scores.get(move)[2] += 1;
 
+
             } else {
                 // recursively call simGame until complete
                 simulateGame(turn, simBoard.convertToIntArray());
@@ -96,6 +86,21 @@ public class Player {
         // return the fully populated scores array
         return scores;
 
+    }
+
+    public Queue<Integer> getMoves(int[] board) {
+        Queue<Integer> moves = new LinkedList<Integer>();
+        for (int i = 0; i < 6; i++) {
+            int pieceIndex = i;
+            // adjust if player 2
+            if (playerID == 2)
+                pieceIndex = (6 - i) * 2;
+
+            // check if the piece has seeds
+            if (board[pieceIndex] > 0)
+                moves.add(i); // add the piece to potential moves
+        }
+        return moves;
     }
 
     public int simulateMove(int move, int playerID, int[] board) {
@@ -132,7 +137,7 @@ public class Player {
                 bestRatio = winRatio;
             }
         }
-        return bestMove;
+        return bestMove + 1;
     }
 
     public void printBoard(int[] board) {

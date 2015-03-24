@@ -194,28 +194,28 @@ public class Board {
             i++;
         }
 
-//        int j = 12;
-//
-//        // adjust for Players board
-//        for (i = 7; i < j; i++) {
-//            int tmpSwitch = tmp[i];
-//            tmp[i] = tmp[j];
-//            tmp[j] = tmpSwitch;
-//            j--;
-//        }
+        int j = 12;
+
+        // adjust for Players board
+        for (i = 7; i < j; i++) {
+            int tmpSwitch = tmp[i];
+            tmp[i] = tmp[j];
+            tmp[j] = tmpSwitch;
+            j--;
+        }
 
         return tmp;
     }
 
     public void setBoard(int[] board) {
-        // adjust for Algorithms board
-//        int j = 12;
-//        for (int i = 7; i < j; i++) {
-//            int tmp = board[i];
-//            board[i] = board[j];
-//            board[j] = tmp;
-//            j--;
-//        }
+        //adjust for Algorithms board
+        int j = 12;
+        for (int i = 7; i < j; i++) {
+            int tmp = board[i];
+            board[i] = board[j];
+            board[j] = tmp;
+            j--;
+        }
 
         this.pieces.clear();
         int count = 0;
@@ -227,7 +227,7 @@ public class Board {
                 owner = 2;
 
             Stack<Seed> tmp = new Stack<Seed>();
-            for (int j = 0; j < board[i]; j++) {
+            for (j = 0; j < board[i]; j++) {
                 tmp.push(new Seed(count));
                 count++;
             }
