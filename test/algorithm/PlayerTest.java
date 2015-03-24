@@ -1,6 +1,6 @@
 package algorithm;
 
-import algorithm.Player;
+import kalah.Player;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,7 +9,6 @@ import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Objects;
 
 import static org.junit.Assert.*;
 @RunWith(Parameterized.class)

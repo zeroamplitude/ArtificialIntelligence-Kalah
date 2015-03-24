@@ -39,13 +39,13 @@ class ChatServer(Server):
 		self.AddPlayer(channel)
 	
 	def AddPlayer(self, player):
-		print "New Player" + str(player.addr)
+		print "New algorithm.Player" + str(player.addr)
 		self.players[player] = True
 		self.SendPlayers()
 		print "players", [p for p in self.players]
 	
 	def DelPlayer(self, player):
-		print "Deleting Player" + str(player.addr)
+		print "Deleting algorithm.Player" + str(player.addr)
 		del self.players[player]
 		self.SendPlayers()
 	

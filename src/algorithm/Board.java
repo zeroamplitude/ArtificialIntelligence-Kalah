@@ -1,13 +1,12 @@
 package algorithm;
 
+
 import java.util.*;
 
 /**
  * This class represents a board of the kalah game.
  */
 public class Board {
-
-    private Player algorithm;
 
 	/**
 	 * A map of type key, int, and value, piece, which represents
@@ -20,24 +19,13 @@ public class Board {
 	 */
 	private int turn;
 
-    /**
-     * An array of 2 house objects that represent the player's homes
-     */
-    private House[] home;
 
 	/**
 	 * This is the default constructor for the Board class.This will set the
 	 * board to it's initial game state.
-     * @param algorithm
      */
-	public Board(Player algorithm) {
+	public Board() {
         this.turn = 1;
-
-        // create a reference to the algorithm
-        this.algorithm = algorithm;
-
-        // initialize player homes
-        this.home = new House[2];
 
         // initialize an empty map of pieces
         this.pieces = new HashMap<Integer, Piece>();
@@ -57,7 +45,6 @@ public class Board {
             if (i == 6 || i == 13) {
                 // add a house to the map with empty seeds
                 pieces.put(i, new House(i, owner, seeds));
-                this.home[i % 6] = (House) pieces.get(i);
 
             } else {
                 // push seeds to the stack
@@ -177,16 +164,12 @@ public class Board {
             destIndex ++;
         }
 
-
-
-
         // check is game is over
         if(isGameOver()) {
             clear();
             turn = 0;
         }
 
-        algorithm.setTmpBoard(convertToIntArray());
         return turn;
 	}
 

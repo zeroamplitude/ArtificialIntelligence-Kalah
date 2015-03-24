@@ -1,5 +1,6 @@
 package algorithm;
 
+import kalah.Player;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +15,7 @@ public class BoardTest {
     @Before
     public void setUp() throws Exception {
         this.player = new Player(1);
-        this.board = new Board(player);
+        this.board = new Board();
     }
 
     @After

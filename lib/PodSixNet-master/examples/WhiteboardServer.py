@@ -54,13 +54,13 @@ class WhiteboardServer(Server):
 		self.AddPlayer(channel)
 	
 	def AddPlayer(self, player):
-		print "New Player" + str(player.addr)
+		print "New algorithm.Player" + str(player.addr)
 		self.players[player] = True
 		player.Send({"action": "initial", "lines": dict([(p.id, {"color": p.color, "lines": p.lines}) for p in self.players])})
 		self.SendPlayers()
 	
 	def DelPlayer(self, player):
-		print "Deleting Player" + str(player.addr)
+		print "Deleting algorithm.Player" + str(player.addr)
 		del self.players[player]
 		self.SendPlayers()
 	
