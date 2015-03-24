@@ -94,11 +94,11 @@ public class Player {
             int pieceIndex = i;
             // adjust if player 2
             if (playerID == 2)
-                pieceIndex = (6 - i) * 2;
+                pieceIndex += (6 - i) * 2;
 
             // check if the piece has seeds
             if (board[pieceIndex] > 0)
-                moves.add(i); // add the piece to potential moves
+                moves.add(pieceIndex); // add the piece to potential moves
         }
         return moves;
     }
