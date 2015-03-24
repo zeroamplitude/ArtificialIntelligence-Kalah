@@ -49,14 +49,16 @@ public class SimulateTest {
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
         int[] b     = new int[]{3,3,3,3,3,3,0,3,3,3,3,3,3,0};
-        int[] b2  = new int[]{0,4,4,4,3,3,0,3,3,3,3,3,3,0};
+        int[] b2  = new int[]{0,0,0,0,0,8,0,0,0,0,0,0,0,0};
 
 
         return Arrays.asList(new Object[][]{
                 //  board move player  expT      expB
                 {   b,     0,    1,     2,       b2 },
                 {   b,     3,    1,     1,       b  },
-                {   b,     0,    2,     1,       b2}
+                {   b,     0,    2,     1,       b2 },
+                {   b,     5,    1,     2,       b2 },
+                {  b2,     5,    1,     0,       b  },
         });
     }
 

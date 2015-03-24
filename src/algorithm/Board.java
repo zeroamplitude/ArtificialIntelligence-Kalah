@@ -127,7 +127,6 @@ public class Board {
             // put the seed into the piece
             dest.putItem(seed);
 
-
             // check if that was the last seed
             if (origin.getCount() == 0) {
                 // check if cur/des is a store
@@ -142,15 +141,13 @@ public class Board {
                             if (tmp.getCount() > 0) {
                                 House plHome = (House) pieces.get(player * 7 - 1);
                                 // transfer all seeds from across into players home
-                                for (int j = 0; j < dest.getCount(); j++) {
+                                for (int j = 0; j < dest.getCount(); j++)
                                     plHome.putItem(tmp.getItem());
-                                }
+                                // cast dest to a store
+                                tmp = (Store) dest;
                                 // transfer all seeds from dest into players home
-                                for (int j = 0; j < tmp.getCount(); j++){
-                                    // cast dest to a store
-                                    tmp = (Store) dest;
+                                for (int j = 0; j < tmp.getCount(); j++)
                                     plHome.putItem(tmp.getItem());
-                                }
                             }
                         }
                     }
