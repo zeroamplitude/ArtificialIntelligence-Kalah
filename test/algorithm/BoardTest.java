@@ -1,6 +1,5 @@
 package algorithm;
 
-import kalah.Player;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -44,11 +43,11 @@ public class BoardTest {
     public void testTransfer() throws Exception {
         int[] b2 = new int[]{0,0,0,0,0,1,1,0,0,1,1,0,0,1};
         assertEquals(0, board.transfer(5, 1, b2));
-        player.printBoard(board.convertToIntArray());
+//        player.printBoard(board.convertToIntArray());
         int[] b1 = new int[]{0,0,0,0,1,0,1,0,0,0,0,0,1,1};
-        player.printBoard(b1);
+//        player.printBoard(b1);
         assertEquals(0, board.transfer(4, 1, b1));
-        player.printBoard(board.convertToIntArray());
+//        player.printBoard(board.convertToIntArray());
     }
 
     @Test

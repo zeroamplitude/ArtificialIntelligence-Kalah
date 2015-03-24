@@ -1,8 +1,6 @@
 package algorithm;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * Player:
@@ -29,7 +27,7 @@ public class Player {
         // set board
         this.board = board;
 
-        int[][] scores = simulateGame(playerID, board);
+        Map<Integer, Integer[]> scores = simulateGame(playerID, board);
 
         // calculate the best move
         int move = calcBestMove(scores);
@@ -52,17 +50,18 @@ public class Player {
         return moves;
     }
 
-    public int[][] simulateGame(int player, int[] board) {
+    public Map<Integer, Integer[]> simulateGame(int player, int[] board) {
         Queue<Integer> moves = getMoves(board);
 
-        Iterator iter = moves.iterator();
-
         // An 2D array that holds game outcomes of each move
-        int[][] scores = new int[moves.size()][3];
+        Map<Integer, Integer[]> scores = new HashMap<Integer, Integer[]>();
+
         // initialize to 0
-        for (int i = 0; i < moves.size(); i++)
+        for (Integer i : moves)
             for (int j = 0; j < 3; j++)
-                scores[i][j] = 0;
+                scores.put(i, (new Integer[]{0, 0, 0}));
+
+        Iterator iter = moves.iterator();
 
         // while there are moves left
         while (iter.hasNext()) {
@@ -78,15 +77,15 @@ public class Player {
             if (turn == 0 || tmpBoard[6] > 18 || tmpBoard[13] > 18) {
 
                 // get score of game
-                scores[move][0] += getScore(tmpBoard);
+                scores.get(move)[0] += getScore(tmpBoard);
 
                 // get winner
-                if (scores[move][0] > 0) scores[move][1] += 2;
-                else if (scores[move][0] == 0) scores[move][1] += 1;
-                else scores[move][1] += 0;
+                if (scores.get(move)[0] > 0) scores.get(move)[1] += 2;
+                else if (scores.get(move)[0] == 0) scores.get(move)[1] += 1;
+                else scores.get(move)[1] += 0;
 
                 // count game
-                scores[move][2] += 1;
+                scores.get(move)[2] += 1;
 
             } else {
                 // recursively call simGame until complete
@@ -114,27 +113,25 @@ public class Player {
         return diff;
     }
 
-    public int calcBestMove(int[][] scores) {
+    public int calcBestMove(Map<Integer, Integer[]> scores) {
         double bestRatio = -1;
         double winRatio;
         int bestScore = -9999;
         int bestMove = 0;
 
-        for (int i = 0; i < scores.length; i++) {
-
-            winRatio = ((double)scores[i][1]/(double)scores[i][2]) * 100;
+        for (int i : scores.keySet()) {
+            winRatio = ((double)scores.get(i)[1]/(double)scores.get(i)[2]) * 100;
 
             if (winRatio > bestRatio){
                 bestRatio = winRatio;
-                bestScore = scores[0][i];
+                bestScore = scores.get(i)[0];
                 bestMove = i;
-            }else if (winRatio == bestRatio && scores[0][i] > bestScore){
-                bestScore = scores[0][i];
+            }else if (winRatio == bestRatio && scores.get(i)[0] > bestScore){
+                bestScore = scores.get(i)[0];
                 bestMove = i;
                 bestRatio = winRatio;
             }
         }
-
         return bestMove;
     }
 }

@@ -1,5 +1,7 @@
 package kalah;
 
+import algorithm.Player;
+
 /**
  * client.kalah.Move:
  * <brief description of class>

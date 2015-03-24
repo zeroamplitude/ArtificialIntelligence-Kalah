@@ -1,6 +1,5 @@
 package algorithm;
 
-import kalah.Player;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -102,10 +101,10 @@ public class PlayerTest {
 //
 //    }
 
-    @Test
-    public void testPrintBoard() throws Exception {
-        int[] testBoard = new int[] { 0, 0, 0, 1, 0, 0, 0,
-                0, 0, 0, 0, 1, 0, 0};
-        player.printBoard(testBoard);
-    }
+//    @Test
+//    public void testPrintBoard() throws Exception {
+//        int[] testBoard = new int[] { 0, 0, 0, 1, 0, 0, 0,
+//                0, 0, 0, 0, 1, 0, 0};
+//        player.printBoard(testBoard);
+//    }
 }
