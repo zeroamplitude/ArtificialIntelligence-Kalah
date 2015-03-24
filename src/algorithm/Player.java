@@ -182,7 +182,7 @@ public class Player {
          **********************************************************************/
         if (!cellEmpty){ //if it is a valid move
 
-            System.out.println("TRANSFER MOVE: " + move + " PLAYER: " + player);
+            System.out.println("TRANSFER MOVE: " + (12 - move) + " PLAYER: " + player);
             newPlayer = this.simBoard.transfer(move, player,currBoard);
             newBoard = this.tmpBoard;
         }
@@ -229,7 +229,7 @@ public class Player {
                 for (int simMove = 0; simMove < 6; simMove ++){
                     int temp = simMove;
                     System.out.println("*************************************************************");
-                    System.out.println("XXXXXXXXXXXXXX TRYING PLAYER: " + this.playerID + " MOVE: " + temp + " XXXXXXXXXXXXXX");
+                    System.out.println("XXXXXXXXXXXXXX TRYING PLAYER: " + newPlayer + " MOVE: " + temp + " XXXXXXXXXXXXXX");
                     System.out.println("*************************************************************");
                     tempArray = getValueOfMove(simMove, newPlayer, newBoard);
                     if (tempArray[0] == -9999 && tempArray[1] == -9999 && tempArray[2] == -9999)
@@ -242,7 +242,7 @@ public class Player {
                 for (int simMove = 12; simMove > 6; simMove --){
                     int temp = 12 - simMove;
                     System.out.println("*************************************************************");
-                    System.out.println("XXXXXXXXXXXXXXXX TRYING PLAYER: " + this.playerID + " MOVE: " + temp + " XXXXXXXXXXXXXXXX");
+                    System.out.println("XXXXXXXXXXXXXXXX TRYING PLAYER: " + newPlayer + " MOVE: " + temp + " XXXXXXXXXXXXXXXX");
                     System.out.println("*************************************************************");
                     tempArray = getValueOfMove(12 - simMove, newPlayer, newBoard);
                     if (tempArray[0] == -9999 && tempArray[1] == -9999 && tempArray[2] == -9999)
