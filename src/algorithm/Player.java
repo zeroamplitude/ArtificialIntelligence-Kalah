@@ -64,6 +64,7 @@ public class Player {
 		System.out.println("********************  ANALYSIS COMPLETE  ********************");
 		System.out.println("*************************************************************");
         printBoard(originalBoard);
+
 		// Caluculate the best move given the score and the win % of each move
 		System.out.println("WIN PERCENTAGE ARRAY: ");
 		for (int i = 0; i < 6; i ++){
@@ -175,7 +176,7 @@ public class Player {
 		int[] newBoard;
 		int newPlayer = -1;
 		System.out.println("GET VALUE OF MOVE TEST 1");
-		//if (player == 2) move += 7;
+		if (player == 2) move += (6-move) * 2;
 		if (currBoard[move] == 0) cellEmpty = true;
 
         System.out.println("CURRENT BOARD BEFORE TRANSFER");

@@ -115,15 +115,6 @@ public class Board {
         // source to board keys
         if (player == 2) {
             source += (6 - source) * 2;
-            // alter source if player 2
-            switch (source) {
-                case 7: source = 12; break;
-                case 8: source = 11; break;
-                case 9: source = 10; break;
-                case 10: source = 9; break;
-                case 11: source = 8; break;
-                case 12: source = 7; break;
-            }
         }
 
         Store origin = (Store) this.pieces.get(source);
@@ -214,33 +205,34 @@ public class Board {
         int[] tmp = new int[14];
 
         int i = 0;
-        int j = 12;
 
         for (Piece cur : pieces.values()) {
                 tmp[i] = cur.getCount();
             i++;
         }
 
-        // adjust for Players board
-        for (i = 7; i < j; i++) {
-            int tmpSwitch = tmp[i];
-            tmp[i] = tmp[j];
-            tmp[j] = tmpSwitch;
-            j--;
-        }
+//        int j = 12;
+//
+//        // adjust for Players board
+//        for (i = 7; i < j; i++) {
+//            int tmpSwitch = tmp[i];
+//            tmp[i] = tmp[j];
+//            tmp[j] = tmpSwitch;
+//            j--;
+//        }
 
         return tmp;
     }
 
     public void setBoard(int[] board) {
         // adjust for Algorithms board
-        int j = 12;
-        for (int i = 7; i < j; i++) {
-            int tmp = board[i];
-            board[i] = board[j];
-            board[j] = tmp;
-            j--;
-        }
+//        int j = 12;
+//        for (int i = 7; i < j; i++) {
+//            int tmp = board[i];
+//            board[i] = board[j];
+//            board[j] = tmp;
+//            j--;
+//        }
 
         this.pieces.clear();
         int count = 0;
@@ -252,7 +244,7 @@ public class Board {
                 owner = 2;
 
             Stack<Seed> tmp = new Stack<Seed>();
-            for (j = 0; j < board[i]; j++) {
+            for (int j = 0; j < board[i]; j++) {
                 tmp.push(new Seed(count));
                 count++;
             }
