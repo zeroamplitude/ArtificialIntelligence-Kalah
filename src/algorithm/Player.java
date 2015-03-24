@@ -242,7 +242,7 @@ public class Player {
                 for (int simMove = 12; simMove > 6; simMove --){
                     int temp = 12 - simMove;
                     System.out.println("*************************************************************");
-                    System.out.println("XXXXXXXXXXXXXX TRYING PLAYER: " + this.playerID + " MOVE: " + temp + " XXXXXXXXXXXXXX");
+                    System.out.println("XXXXXXXXXXXXXXXX TRYING PLAYER: " + this.playerID + " MOVE: " + temp + " XXXXXXXXXXXXXXXX");
                     System.out.println("*************************************************************");
                     tempArray = getValueOfMove(12 - simMove, newPlayer, newBoard);
                     if (tempArray[0] == -9999 && tempArray[1] == -9999 && tempArray[2] == -9999)
