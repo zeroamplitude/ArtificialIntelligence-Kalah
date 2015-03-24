@@ -1,5 +1,6 @@
 import algorithm.Board;
 
+import javax.swing.text.html.HTMLDocument;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -26,15 +27,32 @@ public class Player {
     }
 
     public int makePlay(int[] board) {
-
+        // set board
         this.board = board;
 
         // get all the possible moves
         Queue<Integer> moves = getMoves(board);
 
         Iterator iter = moves.iterator();
-        while (iter.hasNext())
-            simulateMove(moves.poll(), playerID, board);
+        while (iter.hasNext()) {
+            int turn = simulateMove(moves.poll(), playerID, board);
+            // if the game is over
+            if (turn == 0) {
+                // calculate score
+                score = getScore(simBoard.convertToIntArray());
+                if (score > 0) win = 1;
+                else if (score == 0) win = 0.5;
+                else win = 0;
+
+            } else {
+                // simulate the next moves
+                Queue<Integer> nextMoves = getMoves(simBoard.convertToIntArray());
+                Iterator iterNext = nextMoves.iterator();
+                while (iterNext.hasNext())
+                    simulateMove(nextMoves.poll(), turn, simBoard.convertToIntArray());
+            }
+        }
+
 
         // calculate the best move
         int move = calcBestMove();
@@ -59,14 +77,20 @@ public class Player {
 
     public int simulateMove(int move, int playerID, int[] board) {
         int turn = this.simBoard.transfer(move, playerID, board);
-        int[] score = getScore(simBoard.convertToIntArray());
+        int score = getScore(simBoard.convertToIntArray());
+
         return turn;
     }
 
-    public int[] getScore(int[] board) {
+    public int getScore(int[] board) {
         int pl1Score = board[6];
         int pl2Score = board[13];
-        int diff = pl1Score - pl2Score;
+        int diff = 0;
+        if (playerID == 1)
+            diff = pl1Score - pl2Score;
+        else
+            diff = pl2Score - pl1Score;
+        return diff;
     }
 
     public int calcBestMove() {
