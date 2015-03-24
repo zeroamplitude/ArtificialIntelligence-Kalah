@@ -105,7 +105,7 @@ public class Player {
     }
 
     public int simulateMove(int move, int turn, int[] board) {
-        System.out.println("TRANSFER: Player: " + turn + "MOVE: " + move);
+        System.out.println("CALLING TRANSFER: Player: " + turn + "MOVE: " + move);
         System.out.println("Before");
         printBoard(board);
         int newturn = this.simBoard.transfer(move, turn, board);
