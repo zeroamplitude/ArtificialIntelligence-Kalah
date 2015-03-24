@@ -85,6 +85,21 @@ public class PlayerTest {
         assertEquals(exp, player.makePlay(testBoard));
     }
 
+    @Test
+    public void testSimulateGame() throws Exception {
+
+    }
+
+    @Test
+    public void testGetMoves() throws Exception {
+
+    }
+
+    @Test
+    public void testSimulateMove() throws Exception {
+
+    }
+
 //
 //    @Test
 //    public void testGetMoveArray() throws Exception {
