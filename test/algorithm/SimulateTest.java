@@ -1,5 +1,6 @@
 package algorithm;
 
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,45 +34,35 @@ public class SimulateTest {
         this.exp = exp;
         this.bExp =  bExp;
         this.pl = pl;
+    }
+
+    @Before
+    public void setUp() throws Exception {
         this.player = new Player(pl);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        this.player = null;
     }
 
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
         int[] b     = new int[]{3,3,3,3,3,3,0,3,3,3,3,3,3,0};
-        int[] bExp  = new int[]{0,4,4,4,3,3,0,3,3,3,3,3,3,0};
+        int[] b2  = new int[]{0,4,4,4,3,3,0,3,3,3,3,3,3,0};
 
 
         return Arrays.asList(new Object[][]{
                 //  board move player  expT      expB
-                {   b,     1,    1,     2,       bExp }
+                {   b,     0,    1,     2,       b2 },
+                {   b,     3,    1,     1,       b  },
+                {   b,     0,    2,     1,       b2}
         });
     }
 
-//    @Before
-//    public void setUp() {
-//    }
 
     @Test
-    public void testSimulateMove() throws Exception {
+    public void testASimulateMove() throws Exception {
         assertEquals(exp, player.simulateMove(move, pl, testBoard));
     }
-
-    @Test
-    public void testBoardAugmentation() throws Exception {
-
-        Field boardField = player.getClass().getDeclaredField("simBoard");
-        boardField.setAccessible(true);
-
-        Board bb = (Board) boardField.get(player);
-
-        int[] tmp = bb.convertToIntArray();
-
-        assertArrayEquals(bExp, tmp);
-    }
-
-//    @AfterClass
-//    public void tearDown() {
-//        this.player = null;
-//    }
 }

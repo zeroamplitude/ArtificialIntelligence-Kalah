@@ -111,7 +111,9 @@ public class Player {
         System.out.println("TRANSFER: Player: " + playerID + "MOVE: " + move);
         System.out.println("Before");
         printBoard(board);
-        return this.simBoard.transfer(move, playerID, board);
+        int turn = this.simBoard.transfer(move, playerID, board);
+        printBoard(simBoard.convertToIntArray());
+        return turn;
     }
 
     public int getScore(int[] board) {

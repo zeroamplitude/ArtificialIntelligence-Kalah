@@ -52,9 +52,11 @@ public class BoardTest {
 
     @Test
     public void testClear() throws Exception {
-        int[] b2 = new int[]{0,0,0,0,0,1,1,0,0,1,1,0,0,1};
+        int[] exp = new int[]{0,0,0,0,0,0,2,0,0,0,0,0,0,3};
+        int[] b2  = new int[]{0,0,0,0,0,1,1,0,0,1,1,0,0,1};
         board.clear();
-//        assertEquals(0, );
+        System.out.println(board.convertToIntArray()[6]);
+        assertArrayEquals(exp, board.convertToIntArray());
     }
 
     @Test
