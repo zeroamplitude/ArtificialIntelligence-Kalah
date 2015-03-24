@@ -26,8 +26,9 @@ public class Player {
     public int makePlay(int[] board) {
         // set board
         this.board = board;
-        System.out.println("Before");
-        printBoard(board);
+        System.out.println("START");
+
+
 
         Map<Integer, Integer[]> scores = simulateGame(playerID, board);
 
@@ -55,12 +56,15 @@ public class Player {
             // get the move
             int move = moves.poll();
 
+
             // simulate the move
             int turn = simulateMove(move, playerID, board);
 
             int[] tmpBoard = simBoard.convertToIntArray();
             System.out.println("After piece: " + move);
             printBoard(tmpBoard);
+            System.out.println("*****************************************************************");
+
 
             // Base Case: game over
             if (turn == 0 || tmpBoard[6] > 18 || tmpBoard[13] > 18) {
@@ -104,6 +108,9 @@ public class Player {
     }
 
     public int simulateMove(int move, int playerID, int[] board) {
+        System.out.println("TRANSFER: Player: " + playerID + "MOVE: " + move);
+        System.out.println("Before");
+        printBoard(board);
         return this.simBoard.transfer(move, playerID, board);
     }
 
