@@ -30,32 +30,10 @@ public class Player {
         // set board
         this.board = board;
 
-        // get all the possible moves
-        Queue<Integer> moves = getMoves(board);
-
-        Iterator iter = moves.iterator();
-        while (iter.hasNext()) {
-            int turn = simulateMove(moves.poll(), playerID, board);
-            // if the game is over
-            if (turn == 0) {
-                // calculate score
-                score = getScore(simBoard.convertToIntArray());
-                if (score > 0) win = 1;
-                else if (score == 0) win = 0.5;
-                else win = 0;
-
-            } else {
-                // simulate the next moves
-                Queue<Integer> nextMoves = getMoves(simBoard.convertToIntArray());
-                Iterator iterNext = nextMoves.iterator();
-                while (iterNext.hasNext())
-                    simulateMove(nextMoves.poll(), turn, simBoard.convertToIntArray());
-            }
-        }
-
+        int[][] scores = simulateGame(playerID, board);
 
         // calculate the best move
-        int move = calcBestMove();
+        int move = calcBestMove(scores);
 
         return move;
     }
@@ -75,9 +53,62 @@ public class Player {
         return moves;
     }
 
+    public int[][] simulateGame(int player, int[] board) {
+        Queue<Integer> moves = getMoves(board);
+
+        Iterator iter = moves.iterator();
+
+        // An 2D array that holds game outcomes of each move
+        int[][] scores = new int[moves.size()][3];
+
+        // while there are moves left
+        while (iter.hasNext()) {
+            // get the move
+            int move = moves.poll();
+
+            // simulate the move
+            int turn = simulateMove(move, playerID, board);
+
+            int[] tmpBoard = simBoard.convertToIntArray();
+
+            // Base Case: game over
+            if (turn == 0 || tmpBoard[6] > 18 || tmpBoard[13] > 18) {
+
+                // get score of game
+                scores[move][0] = getScore(tmpBoard);
+
+                // get winner
+                if (scores[move][0] > 0) scores[move][1] = 2;
+                else if (scores[move][0] == 0) scores[move][1] = 1;
+                else scores[move][1] = 0;
+
+                // count game
+                scores[move][2] = 1;
+
+            } else {
+
+                // recursively call simGame until complete
+                simulateGame(turn, simBoard.convertToIntArray());
+
+            }
+        }
+
+        // return the fully populated scores array
+        return scores;
+
+    }
+
     public int simulateMove(int move, int playerID, int[] board) {
         int turn = this.simBoard.transfer(move, playerID, board);
-        int score = getScore(simBoard.convertToIntArray());
+
+        if (turn == 0) {
+            // calculate score
+
+
+        } else {
+            // if the game is over
+            makePlay()
+        }
 
         return turn;
     }
@@ -93,7 +124,8 @@ public class Player {
         return diff;
     }
 
-    public int calcBestMove() {
+    public int calcBestMove(int[] scores) {
+
         return 0;
     }
 }
