@@ -1,5 +1,6 @@
 import algorithm.Board;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -25,12 +26,15 @@ public class Player {
     }
 
     public int makePlay(int[] board) {
+
+        this.board = board;
+
         // get all the possible moves
-        Queue moves = getMoves(board);
+        Queue<Integer> moves = getMoves(board);
 
-        for (Object m : moves) {
-
-        }
+        Iterator iter = moves.iterator();
+        while (iter.hasNext())
+            simulateMove(moves.poll(), playerID, board);
 
         // calculate the best move
         int move = calcBestMove();
@@ -54,7 +58,15 @@ public class Player {
     }
 
     public int simulateMove(int move, int playerID, int[] board) {
-        return this.simBoard.transfer(move, playerID, board);
+        int turn = this.simBoard.transfer(move, playerID, board);
+        int[] score = getScore(simBoard.convertToIntArray());
+        return turn;
+    }
+
+    public int[] getScore(int[] board) {
+        int pl1Score = board[6];
+        int pl2Score = board[13];
+        int diff = pl1Score - pl2Score;
     }
 
     public int calcBestMove() {
