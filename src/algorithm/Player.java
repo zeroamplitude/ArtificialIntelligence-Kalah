@@ -98,7 +98,7 @@ public class Player {
 
         if (this.playerID == 1){
             for (int i = 0; i < 6; i ++){
-                int temp = i + 1;
+                int temp = i;
                 System.out.println("IN GET MOVE ARRAY 1");
                 System.out.println("*************************************************************");
                 System.out.println("*****************  TRYING PLAYER: " + this.playerID + " MOVE: " + temp + "  *****************");
@@ -182,7 +182,7 @@ public class Player {
          **********************************************************************/
         if (!cellEmpty){ //if it is a valid move
 
-            System.out.println("TRANSFER MOVE: " + (12 - move) + " PLAYER: " + player);
+            System.out.println("TRANSFER MOVE: " + (move) + " PLAYER: " + player);
             newPlayer = this.simBoard.transfer(move, player,currBoard);
             newBoard = this.tmpBoard;
         }

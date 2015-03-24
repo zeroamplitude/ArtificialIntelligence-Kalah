@@ -64,10 +64,10 @@ public class PlayerTest {
         return Arrays.asList(new Object[][] {
                 //  board   player  exp
                 {   b1a,    1,      4}, //[0]
-                {   b1b,    2,      5}, //[1]
-                {   b2a,    1,      4}, //[2]
-                {   b2b,    2,      5}, //[3]
-                {   b3a,    1,      3}//,
+              //  {   b1b,    2,      5}, //[1]
+              //  {   b2a,    1,      4}, //[2]
+              //  {   b2b,    2,      5}, //[3]
+              //  {   b3a,    1,      3}//,
               //{ board,  pl#,    exp}
         });
     }
