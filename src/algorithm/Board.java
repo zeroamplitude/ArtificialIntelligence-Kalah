@@ -96,6 +96,8 @@ public class Board {
 	 * the seeds will be transferred from.
 	 */
 	public int transfer(int source, int player, int[] board) {
+        this.turn = player;
+
         setBoard(board);
 
 
