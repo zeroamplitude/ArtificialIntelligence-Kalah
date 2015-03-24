@@ -170,7 +170,7 @@ public class Player {
         if (player == 1){
             if (currBoard[move] == 0) cellEmpty = true;
         }else{
-            if (currBoard[(6 - move) * 2] == 0) cellEmpty = true;
+            if (currBoard[move += (6 - move) * 2] == 0) cellEmpty = true;
         }
 
         System.out.println("CURRENT BOARD BEFORE TRANSFER");
