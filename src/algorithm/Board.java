@@ -96,7 +96,8 @@ public class Board {
 	 * the seeds will be transferred from.
 	 */
 	public int transfer(int source, int player, int[] board) {
-        this.turn = player;
+        System.out.println("TRASFERING MOVE" + source + " PLAYER: " + player);
+        //this.turn = player;
 
         setBoard(board);
 
@@ -151,11 +152,16 @@ public class Board {
                             }
                         }
                     }
+                    System.out.println("TURN AT LINE 155 IN BOARD IS: " + player);
                     // switch turn
-                    if (turn == 1)
-                        turn = 2;
-                    else
-                        turn = 1;
+                    if (player == 1) {
+                        player = 2;
+                        System.out.println("SWITCHING TURN FROM 1 TO 2");
+                    }
+                    else {
+                        player = 1;
+                        System.out.println("SWITCHING TURN FROM 2 TO 1");
+                    }
                 }
             }
             destIndex ++;
@@ -164,10 +170,10 @@ public class Board {
         // check is game is over
         if(isGameOver()) {
             clear();
-            turn = 0;
+            player = 0;
         }
-
-        return turn;
+        System.out.println("RETURNING TURN: " + turn);
+        return player;
 	}
 
     public void clear() {
