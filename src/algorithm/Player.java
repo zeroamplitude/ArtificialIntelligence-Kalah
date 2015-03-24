@@ -120,7 +120,7 @@ public class Player {
         int bestMove = 0;
 
         for (int i : scores.keySet()) {
-            winRatio = ((double)scores.get(i)[1]/(double)scores.get(i)[2]) * 100;
+            winRatio = (((double)scores.get(i)[1]) / (double)scores.get(i)[2]) * 100;
 
             if (winRatio > bestRatio){
                 bestRatio = winRatio;
@@ -133,5 +133,18 @@ public class Player {
             }
         }
         return bestMove;
+    }
+
+    public void printBoard(int[] board) {
+        System.out.printf("+------+------+------+------+------+------+------+------+\n");
+        System.out.printf("|      |  %02d  |  %02d  |  %02d  |  %02d  |  %02d  |  %02d  |      |\n", board[7], board[8], board[9], board[10], board[11], board[12]);
+        System.out.printf("|  %02d  |------+------+------+------+------+------|  %02d  |\n", board[13], board[6]);
+        System.out.printf("|      |  %02d  |  %02d  |  %02d  |  %02d  |  %02d  |  %02d  |      |\n", board[0], board[1], board[2], board[3], board[4], board[5]);
+        System.out.printf("+------+------+------+------+------+------+------+------+\n");
+    }
+
+    public void printScores(Map<Integer, Integer[]> scores) {
+        for (Integer[] score : scores.values())
+            System.out.printf("%d, %d, % d", score[0], score[1], score[2]);
     }
 }
