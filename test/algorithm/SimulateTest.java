@@ -48,8 +48,10 @@ public class SimulateTest {
 
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
-        int[] b     = new int[]{3,3,3,3,3,3,0,3,3,3,3,3,3,0};
+        int[] b   = new int[]{3,3,3,3,3,3,0,3,3,3,3,3,3,0};
         int[] b2  = new int[]{0,0,0,0,0,8,0,0,0,0,0,0,0,0};
+        int[] b3  = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,8,0};
+        int[] b4  = new int[]{0,0,0,0,1,3,0,0,0,0,0,0,0,0};
 
 
         return Arrays.asList(new Object[][]{
@@ -59,6 +61,10 @@ public class SimulateTest {
                 {   b,     0,    2,     1,       b2 },
                 {   b,     5,    1,     2,       b2 },
                 {  b2,     5,    1,     0,       b  },
+                {  b3,     0,    2,     0,       b3 },
+                {  b4,     5,    1,     2,       b4 },
+
+
         });
     }
 
