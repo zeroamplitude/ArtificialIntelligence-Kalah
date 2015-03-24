@@ -145,7 +145,7 @@ public class Player {
                 bestRatio = winRatio;
             }
         }
-        return bestMove;
+        return bestMove + 1;
     }
 
     public void printBoard(int[] board) {

@@ -37,7 +37,7 @@ public class calcBestMoveTest {
             put(4, new Integer[]{5,8,10});
             put(5, new Integer[]{-20,0,10});
         }};
-        assertEquals(0, player.calcBestMove(scores));
+        assertEquals(1, player.calcBestMove(scores));
     }
 
     @Test
@@ -52,7 +52,7 @@ public class calcBestMoveTest {
             put(4, new Integer[]{5,8,10});
             put(5, new Integer[]{-20,0,10});
         }};
-        assertEquals(3, player.calcBestMove(scores));
+        assertEquals(4, player.calcBestMove(scores));
     }
 
     public void testcalcBestMove3() throws Exception {
@@ -66,6 +66,6 @@ public class calcBestMoveTest {
             put(4, new Integer[]{10,8,10});
             put(5, new Integer[]{-20,0,10});
         }};
-        assertEquals(4, player.calcBestMove(scores));
+        assertEquals(5, player.calcBestMove(scores));
     }
 }
