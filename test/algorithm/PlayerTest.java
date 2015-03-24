@@ -28,7 +28,7 @@ public class PlayerTest {
 //        int[] b1a = new int[]{0,3,3,3,3,3,3,0,3,3,3,3,3,3,0};
         //Expected move percentage array: x,x,x,x,100,x
         //Expected score diference array: x,x,x,x, 2 ,x
-        int[] b1a = new int[] { 0, 0, 0, 1, 0, 0, 0,
+        int[] b1a = new int[] { 0, 2, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 1, 0, 0};
 
 
@@ -54,8 +54,26 @@ public class PlayerTest {
         //should be player 1
         //Expected move percentage array: x,x,100,x,x,100
         //Expected score diference array: x,x, 4 ,x,x, 4
-        int[] b3a = new int[] { 0, 0, 1, 0, 0, 1, 0,
+        int[] b3a = new int[] { 0, 1, 1, 0, 0, 1, 0,
                 1, 0, 0, 2, 0, 0, 0};
+
+        //should be player 1
+        //Expected move percentage array: x,x,100,x,x,100
+        //Expected score diference array: x,x, 4 ,x,x, 4
+        int[] b4a = new int[] { 0, 0, 0, 0, 0, 1, 0,
+                0, 0, 1, 0, 0, 0, 0};
+
+        //should be player 1
+        //Expected move percentage array: x,x,100,x,x,50
+        //Expected score diference array: x,x, 3 ,x,x,-4
+        int[] b4b = new int[] { 0, 0, 1, 0, 0, 2, 0,
+                1, 0, 0, 1, 0, 0, 0};
+
+        //should be player 1
+        //Expected move percentage array: x,x,100,x,x,50
+        //Expected score diference array: x,x, 3 ,x,x,-4
+        int[] b5a = new int[] { 0, 1, 0, 1, 0, 1, 0,
+                0, 0, 1, 0, 1, 0, 0};
 
 
 
@@ -65,7 +83,9 @@ public class PlayerTest {
                 {   b1b,    2,      5}, //[1]
                 {   b2a,    1,      4}, //[2]
                 {   b2b,    2,      5}, //[3]
-                {   b3a,    1,      3}//,
+                {   b3a,    1,      3}, //[4]
+                {   b4b,    1,      3}, //[5],
+                {   b5a,    1,      6}
               //{ board,  pl#,    exp}
         });
     }
