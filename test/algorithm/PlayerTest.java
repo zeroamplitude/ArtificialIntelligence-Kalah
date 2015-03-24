@@ -62,10 +62,10 @@ public class PlayerTest {
         return Arrays.asList(new Object[][] {
                 //  board   player  exp
                 {   b1a,    1,      4}, //[0]
-//                {   b1b,    2,      5}, //[1]
-//                {   b2a,    1,      4}, //[2]
-//                {   b2b,    2,      5}, //[3]
-//                {   b3a,    1,      3}//,
+                {   b1b,    2,      5}, //[1]
+                {   b2a,    1,      4}, //[2]
+                {   b2b,    2,      5}, //[3]
+                {   b3a,    1,      3}//,
               //{ board,  pl#,    exp}
         });
     }
@@ -92,6 +92,21 @@ public class PlayerTest {
         int[] GST1 = new int[] { 0, 0, 1, 0, 0, 1, 20,
                 1, 0, 0, 2, 0, 0, 0};
         assertEquals(20, player.getScore(GST1));
+    }
+
+    @Test
+    public void testSimulateGame() throws Exception {
+
+    }
+
+    @Test
+    public void testGetMoves() throws Exception {
+
+    }
+
+    @Test
+    public void testSimulateMove() throws Exception {
+
     }
 
 //
