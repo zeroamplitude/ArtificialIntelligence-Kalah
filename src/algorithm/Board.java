@@ -96,7 +96,7 @@ public class Board {
 	 * the seeds will be transferred from.
 	 */
 	public int transfer(int source, int player, int[] board) {
-        System.out.println("TRASFERING MOVE" + source + " PLAYER: " + player);
+        System.out.println("STARTING TRASFERING MOVE: " + source + " PLAYER: " + player);
         //this.turn = player;
 
         setBoard(board);
@@ -172,7 +172,7 @@ public class Board {
             clear();
             player = 0;
         }
-        System.out.println("RETURNING TURN: " + turn);
+        System.out.println("TRASFER RETURNING TURN: " + turn);
         return player;
 	}
 
