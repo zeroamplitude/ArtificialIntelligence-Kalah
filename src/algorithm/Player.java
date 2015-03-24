@@ -133,6 +133,7 @@ public class Player {
 
         for (int i : scores.keySet()) {
             winRatio = (((double)scores.get(i)[1]) / (double)scores.get(i)[2]) * 100;
+            System.out.println("bestScore: " + bestScore);
 
             if (winRatio > bestRatio){
                 bestRatio = winRatio;
@@ -144,7 +145,7 @@ public class Player {
                 bestRatio = winRatio;
             }
         }
-        return bestMove + 1;
+        return bestMove;
     }
 
     public void printBoard(int[] board) {

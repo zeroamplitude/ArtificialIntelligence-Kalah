@@ -27,6 +27,7 @@ public class calcBestMoveTest {
     }
 
     public void testcalcBestMove() throws Exception {
+        System.out.println("test1");
         this.player = new Player(1);
         Map<Integer,Integer[]> scores = new HashMap<Integer,Integer[]>() {{
             put(0, new Integer[]{-10,10,10});
@@ -36,11 +37,12 @@ public class calcBestMoveTest {
             put(4, new Integer[]{5,8,10});
             put(5, new Integer[]{-20,0,10});
         }};
-        assertEquals(1, player.calcBestMove(scores));
+        assertEquals(0, player.calcBestMove(scores));
     }
 
     @Test
     public void testcalcBestMove2() throws Exception {
+        System.out.println("test2");
         this.player = new Player(1);
         Map<Integer,Integer[]> scores = new HashMap<Integer,Integer[]>() {{
             put(0, new Integer[]{-10,4,10});
@@ -54,9 +56,10 @@ public class calcBestMoveTest {
     }
 
     public void testcalcBestMove3() throws Exception {
+        System.out.println("test3");
         this.player = new Player(1);
         Map<Integer,Integer[]> scores = new HashMap<Integer,Integer[]>() {{
-            put(0, new Integer[]{-10,10,10});
+            put(0, new Integer[]{-10,2,10});
             put(1, new Integer[]{0,5,10});
             put(2, new Integer[]{0,1,10});
             put(3, new Integer[]{5,8,10});
