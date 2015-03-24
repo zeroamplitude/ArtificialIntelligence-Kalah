@@ -98,7 +98,7 @@ public class Player {
 
             // check if the piece has seeds
             if (board[pieceIndex] > 0)
-                moves.add(pieceIndex); // add the piece to potential moves
+                moves.add(i); // add the piece to potential moves
         }
         return moves;
     }

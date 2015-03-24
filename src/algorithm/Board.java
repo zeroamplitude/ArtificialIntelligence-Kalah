@@ -105,11 +105,9 @@ public class Board {
         }
 
         Store origin = (Store) this.pieces.get(source);
+        int count = origin.getCount();
         int destIndex = source + 1;
-
-
-
-        for (int i = 0; i < origin.getCount(); i++) {
+        for (int i = 0; i < count; i++) {
 
            Seed seed = origin.getItem();
 
