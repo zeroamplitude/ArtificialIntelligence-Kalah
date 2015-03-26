@@ -42,7 +42,7 @@ public class PlayerTest {
         //Expected move percentage array: x,100,100,x,x,x
         //Expected score diference array: x, 8 , 6 ,x,x,x
         int[] b2a = new int[] { 0, 3, 4, 0, 0, 0, 0,
-                0, 0, 0, 0, 1, 0, 0};
+                0, 1, 0, 0, 0, 0, 0};
 
 
         //should be player 2
@@ -73,7 +73,7 @@ public class PlayerTest {
         //Expected move percentage array: x,x,100,x,x,50
         //Expected score diference array: x,x, 3 ,x,x,-4
         int[] b5a = new int[] { 0, 1, 0, 1, 0, 1, 0,
-                0, 0, 1, 0, 1, 0, 0};
+                0, 1, 0, 1, 0, 0, 0};
 
 
 
@@ -111,7 +111,7 @@ public class PlayerTest {
         System.out.println("test: " + this.pl);
         int[] GST1 = new int[] { 0, 0, 1, 0, 0, 1, 20,
                 1, 0, 0, 2, 0, 0, 0};
-        assertEquals(20, player.getScore(GST1));
+        assertEquals(20, player.getScore(1, GST1));
     }
 
     @Test

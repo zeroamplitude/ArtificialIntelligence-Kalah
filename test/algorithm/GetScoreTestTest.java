@@ -28,7 +28,7 @@ public class GetScoreTestTest {
         this.player = new Player(1);
         int[] GST1 = new int[] { 0, 0, 1, 0, 0, 1, 20,
                 1, 0, 0, 2, 0, 0, 0};
-        assertEquals(20, player.getScore(GST1));
+        assertEquals(20, player.getScore(1, GST1));
     }
 
     @Test
@@ -36,7 +36,7 @@ public class GetScoreTestTest {
         this.player = new Player(2);
         int[] GST1 = new int[] { 0, 0, 1, 0, 0, 1, 20,
                 1, 0, 0, 2, 0, 0, 0};
-        assertEquals(-20, player.getScore(GST1));
+        assertEquals(-20, player.getScore(2, GST1));
     }
 
     @Test
@@ -44,7 +44,7 @@ public class GetScoreTestTest {
         this.player = new Player(1);
         int[] GST1 = new int[] { 0, 0, 1, 0, 0, 1, 5,
                 1, 0, 0, 2, 0, 0, 5};
-        assertEquals(0, player.getScore(GST1));
+        assertEquals(0, player.getScore(1, GST1));
     }
 
     @Test
@@ -52,6 +52,6 @@ public class GetScoreTestTest {
         this.player = new Player(2);
         int[] GST1 = new int[] { 0, 0, 1, 0, 0, 1, 5,
                 1, 0, 0, 2, 0, 0, 5};
-        assertEquals(0, player.getScore(GST1));
+        assertEquals(0, player.getScore(2, GST1));
     }
 }

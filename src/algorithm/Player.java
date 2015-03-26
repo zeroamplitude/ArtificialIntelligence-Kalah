@@ -17,10 +17,14 @@ public class Player {
 
     private Board simBoard;
 
+    // An 2D array that holds game outcomes of each move
+    Map<Integer, Integer[]> scores;
+
     public Player(int playerID) {
         this.board = new int[14];
         this.playerID = playerID;
         this.simBoard = new Board();
+        this.scores = new HashMap<Integer, Integer[]>();
     }
 
     public int makePlay(int[] board) {
@@ -28,26 +32,28 @@ public class Player {
         this.board = board;
         System.out.println("START");
 
-
-
-        Map<Integer, Integer[]> scores = simulateGame(playerID, board);
+        scores = simulateGame(playerID, board, true);
 
         // calculate the best move
         int move = calcBestMove(scores);
 
+        scores.clear();
+
         return move;
     }
 
-    public Map<Integer, Integer[]> simulateGame(int player, int[] board) {
-        Queue<Integer> moves = getMoves(board);
+    public Map<Integer, Integer[]> simulateGame(int player, int[] board, boolean first) {
+        if (first)
+            player = playerID;
 
-        // An 2D array that holds game outcomes of each move
-        Map<Integer, Integer[]> scores = new HashMap<Integer, Integer[]>();
+        Queue<Integer> moves = getMoves(player, board);
 
-        // initialize to 0
-        for (Integer i : moves)
-            for (int j = 0; j < 3; j++)
-                scores.put(i, (new Integer[]{0, 0, 0}));
+
+//
+//        // initialize to 0
+//        for (Integer i : moves)
+//            for (int j = 0; j < 3; j++)
+//                scores.put(i, (new Integer[]{0, 0, 0}));
 
         Iterator iter = moves.iterator();
 
@@ -58,7 +64,7 @@ public class Player {
 
 
             // simulate the move
-            int turn = simulateMove(move, playerID, board);
+            int turn = simulateMove(move, player, board);
 
             int[] tmpBoard = simBoard.convertToIntArray();
 
@@ -66,20 +72,28 @@ public class Player {
             if (turn == 0 || tmpBoard[6] > 18 || tmpBoard[13] > 18) {
 
                 // get score of game
-                scores.get(move)[0] += getScore(tmpBoard);
-
-                // get winner
-                if (scores.get(move)[0] > 0) scores.get(move)[1] += 2;
-                else if (scores.get(move)[0] == 0) scores.get(move)[1] += 1;
-                else scores.get(move)[1] += 0;
+                int moveScore = getScore(player, tmpBoard);
 
                 // count game
-                scores.get(move)[2] += 1;
+                int gameCount = 2;
+
+                int winner;
+                // get winner
+                if (moveScore > 0)
+                    winner = 2;
+                else if (moveScore == 0)
+                    winner = 1;
+                else
+                    winner = 0;
+
+                Integer[] array = new Integer[] {moveScore, winner, gameCount};
+                scores.put(move, array);
+
 
 
             } else {
                 // recursively call simGame until complete
-                simulateGame(turn, simBoard.convertToIntArray());
+                simulateGame(turn, simBoard.convertToIntArray(), false);
             }
         }
 
@@ -88,12 +102,12 @@ public class Player {
 
     }
 
-    public Queue<Integer> getMoves(int[] board) {
+    public Queue<Integer> getMoves(int player, int[] board) {
         Queue<Integer> moves = new LinkedList<Integer>();
         for (int i = 0; i < 6; i++) {
             int pieceIndex = i;
             // adjust if player 2
-            if (playerID == 2)
+            if (player == 2)
                 pieceIndex += (6 - i) * 2;
 
             // check if the piece has seeds
@@ -110,17 +124,17 @@ public class Player {
         int turn = this.simBoard.transfer(move, playerID, board);
         System.out.println("After piece: " + move);
         printBoard(simBoard.convertToIntArray());
-        System.out.println("*****************************************************************");
+//        System.out.println("*****************************************************************");
 
 
         return turn;
     }
 
-    public int getScore(int[] board) {
+    public int getScore(int player, int[] board) {
         int pl1Score = board[6];
         int pl2Score = board[13];
         int diff;
-        if (playerID == 1)
+        if (player == 1)
             diff = pl1Score - pl2Score;
         else
             diff = pl2Score - pl1Score;
@@ -135,7 +149,9 @@ public class Player {
 
         for (int i : scores.keySet()) {
             winRatio = (((double)scores.get(i)[1]) / (double)scores.get(i)[2]) * 100;
-            System.out.println("bestScore: " + bestScore);
+//            System.out.println("bestScore: " + bestScore);
+            System.out.println(i + " Win Ratio: " + winRatio);
+
 
             if (winRatio > bestRatio){
                 bestRatio = winRatio;
@@ -147,15 +163,8 @@ public class Player {
                 bestRatio = winRatio;
             }
         }
-        return bestMove + 1;
-    }
 
-    public void printBoard(int[] board) {
-        System.out.printf("+------+------+------+------+------+------+------+------+\n");
-        System.out.printf("|      |  %02d  |  %02d  |  %02d  |  %02d  |  %02d  |  %02d  |      |\n", board[7], board[8], board[9], board[10], board[11], board[12]);
-        System.out.printf("|  %02d  |------+------+------+------+------+------|  %02d  |\n", board[13], board[6]);
-        System.out.printf("|      |  %02d  |  %02d  |  %02d  |  %02d  |  %02d  |  %02d  |      |\n", board[0], board[1], board[2], board[3], board[4], board[5]);
-        System.out.printf("+------+------+------+------+------+------+------+------+\n");
+        return bestMove + 1;
     }
 
     public void printScores(Map<Integer, Integer[]> scores) {
