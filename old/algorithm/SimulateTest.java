@@ -69,8 +69,8 @@ public class SimulateTest {
     }
 
 
-    @Test
-    public void testASimulateMove() throws Exception {
-        assertEquals(exp, player.simulateMove(move, pl, testBoard));
-    }
+//    @Test
+//    public void testASimulateMove() throws Exception {
+//        assertEquals(exp, player.simulateMove(move, pl, testBoard));
+//    }
 }

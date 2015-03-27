@@ -1,154 +1,50 @@
 package algorithm;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import junit.framework.Test;
+import junit.framework.TestSuite;
+import junit.framework.TestCase;
 
-import java.util.Arrays;
-import java.util.Collection;
+/**
+ * Player Tester.
+ *
+ * @author <Authors name>
+ * @since <pre>03/26/2015</pre>
+ * @version 1.0
+ */
+public class PlayerTest extends TestCase {
 
-import static org.junit.Assert.*;
-@RunWith(Parameterized.class)
-public class PlayerTest {
-    private int[] testBoard;
-    private int exp;
-    private int pl;
     private Player player;
 
-    public PlayerTest(int[] board, int pl, int exp) {
-        this.testBoard = board;
-        this.pl = pl;
-        this.exp = exp;
+    public PlayerTest(String name) {
+        super(name);
     }
 
-    @Parameterized.Parameters
-    public static Collection<Object[]> data() {
-//        int[] b1a = new int[]{0,3,3,3,3,3,3,0,3,3,3,3,3,3,0};
-        //Expected move percentage array: x,x,x,x,100,x
-        //Expected score diference array: x,x,x,x, 2 ,x
-        int[] b1a = new int[] { 0, 2, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 1, 0, 0};
-
-
-        //should be player 2
-        //Expected move percentage array: x,x,x,x,100,x
-        //Expected score diference array: x,x,x,x, 2 ,x
-        int[] b1b = new int[] { 0, 0, 0, 1, 0, 0, 0,
-                0, 0, 0, 0, 1, 0, 0};
-
-
-        //Expected move percentage array: x,100,100,x,x,x
-        //Expected score diference array: x, 8 , 6 ,x,x,x
-        int[] b2a = new int[] { 0, 3, 4, 0, 0, 0, 0,
-                0, 1, 0, 0, 0, 0, 0};
-
-
-        //should be player 2
-        //Expected move percentage array: x,x,x,100,100,x
-        //Expected score diference array: x,x,x, 6 , 8 ,x
-        int[] b2b = new int[] { 0, 1, 0, 0, 0, 0, 0,
-                0, 0, 0, 4, 3, 0, 0};
-
-        //should be player 1
-        //Expected move percentage array: x,x,100,x,x,100
-        //Expected score diference array: x,x, 4 ,x,x, 4
-        int[] b3a = new int[] { 0, 1, 1, 0, 0, 1, 0,
-                1, 0, 0, 2, 0, 0, 0};
-
-        //should be player 1
-        //Expected move percentage array: x,x,100,x,x,100
-        //Expected score diference array: x,x, 4 ,x,x, 4
-        int[] b4a = new int[] { 0, 0, 0, 0, 0, 1, 0,
-                0, 0, 1, 0, 0, 0, 0};
-
-        //should be player 1
-        //Expected move percentage array: x,x,100,x,x,50
-        //Expected score diference array: x,x, 3 ,x,x,-4
-        int[] b4b = new int[] { 0, 0, 1, 0, 0, 2, 0,
-                1, 0, 0, 1, 0, 0, 0};
-
-        //should be player 1
-        //Expected move percentage array: x,x,100,x,x,50
-        //Expected score diference array: x,x, 3 ,x,x,-4
-        int[] b5a = new int[] { 0, 1, 0, 1, 0, 1, 0,
-                0, 1, 0, 1, 0, 0, 0};
-
-
-
-        return Arrays.asList(new Object[][] {
-                //  board   player  exp
-                {   b1a,    1,      4}, //[0]
-                {   b1b,    2,      5}, //[1]
-                {   b2a,    1,      4}, //[2]
-                {   b2b,    2,      5}, //[3]
-                {   b3a,    1,      3}, //[4]
-                {   b4b,    1,      3}, //[5],
-                {   b5a,    1,      6}
-              //{ board,  pl#,    exp}
-        });
-    }
-
-    @Before
     public void setUp() throws Exception {
-        player = new Player(pl);
+        super.setUp();
+        player = new Player(1);
     }
 
-    @After
     public void tearDown() throws Exception {
+        super.tearDown();
         player = null;
     }
 
-    @Test
-    public void testMakePlay() throws Exception {
-        assertEquals(exp, player.makePlay(testBoard));
-    }
-
-    @Test
-    public void testGetScore() throws Exception {
-        this.pl = 2;
-        System.out.println("test: " + this.pl);
-        int[] GST1 = new int[] { 0, 0, 1, 0, 0, 1, 20,
-                1, 0, 0, 2, 0, 0, 0};
-        assertEquals(20, player.getScore(1, GST1));
-    }
-
-    @Test
-    public void testSimulateGame() throws Exception {
-
-    }
-
-    @Test
     public void testGetMoves() throws Exception {
+        int[] TEMP_BOARD = new int[] {3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 0};
+        int move = player.makePlay(TEMP_BOARD);
+        System.out.print(move);
+
+//        TEMP_BOARD = new int[] {3, 3, 0, 4, 4, 4, 0, 3, 3, 3, 3, 3, 3, 0};
+//        move = player.makePlay(TEMP_BOARD);
+//        System.out.print(move);
 
     }
 
-    @Test
-    public void testSimulateMove() throws Exception {
-
+    public void testGetScore() throws Exception {
+        //TODO: Test goes here...
     }
 
-//
-//    @Test
-//    public void testGetMoveArray() throws Exception {
-//
-//    }
-//
-//    @Test
-//    public void testGetValueOfMove() throws Exception {
-//
-//    }
-//
-//    @Test
-//    public void testMain() throws Exception {
-//
-//    }
-
-//    @Test
-//    public void testPrintBoard() throws Exception {
-//        int[] testBoard = new int[] { 0, 0, 0, 1, 0, 0, 0,
-//                0, 0, 0, 0, 1, 0, 0};
-//        player.printBoard(testBoard);
-//    }
+    public static Test suite() {
+        return new TestSuite(PlayerTest.class);
+    }
 }

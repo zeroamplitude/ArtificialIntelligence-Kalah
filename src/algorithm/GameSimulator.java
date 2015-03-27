@@ -1,20 +1,9 @@
 package algorithm;
 
-import org.junit.internal.JUnitSystem;
-
 /**
  * This class represents a Game of Kalah. It's responsibilities are control game flow and updating GUI elements as necessary.
  */
-public class Game {
-
-	/**
-	 * An object of type player that represents Player 1 in the game.
-	 */
-	private Player pl1;
-	/**
-	 * An object of type player that represents player 2 in the game.
-	 */
-	private Player pl2;
+public class GameSimulator {
 	/**
 	 * An integer that represents the game's id
 	 */
@@ -26,10 +15,7 @@ public class Game {
 
     private int turn;
 
-    public Game(Player pl1, Player pl2) {
-        this.pl1 = pl1;
-        this.pl2 = pl2;
-
+    public GameSimulator() {
         this.board = new int[14];
 
         // create a  board with specified number of seeds
@@ -43,23 +29,37 @@ public class Game {
         this.turn = 1;
     }
 
+    public void setGameState(int[] board, int turn) {
+        this.board = board;
+        this.turn = turn;
+    }
+
+    public int[] getBoard() {
+        return board;
+    }
+
+
+    public int getTurn() {
+        return turn;
+    }
+
     /**
 	 * This method calls the move method of the player whose turn it is,
 	 * passes the results to board which executes the move. If the board
 	 * returns an invalid move the player whose turn it is, will be signaled
 	 * to move again. If board signals game over then game exits.
 	 */
-	public boolean update() {
-        int move;
-        if (turn == 1)
-            move = pl1.makeMove(board);
-        else
-            move = pl2.makeMove(board);
-
-        turn = move(move, turn);
-
-        return turn != 0;
-    }
+//	public boolean update() {
+//        int move;
+//        if (turn == 1)
+//            move = pl1.makeMove(board);
+//        else
+//            move = pl2.makeMove(board);
+//
+//        turn = move(move, turn);
+//
+//        return turn != 0;
+//    }
 
     /**
      * This method is responsible for making a move on the board. Before the move is executed within the method validation methods are
@@ -76,7 +76,7 @@ public class Game {
      */
     public int move(int store, int pid) {
         // adjust the store to follow boards indexes
-        store -= 1;
+//        store -= 1;
         // if player 2 adjust store
         if (pid == 2)
             store = across(store);
@@ -95,6 +95,11 @@ public class Game {
                 turn = 1;
         }
 
+        if (gameover()) {
+            clear();
+            turn = 0;
+        }
+
         return turn;
     }
 
@@ -111,7 +116,7 @@ public class Game {
         int seeds = board[store];
         for (int i = 1; i <= seeds; i++) {
             // if the dest if the opponents house -> skip
-            if (dest == 6 && store < 6 || dest == 13 && store > 6)
+            if (dest == 6 && store > 6 || dest == 13 && store < 6)
                 dest++;
             // if the dest is passed index range -> reset
             if (dest > 13)
@@ -170,6 +175,30 @@ public class Game {
         board[across(store)] = 0;
     }
 
+    public boolean gameover() {
+        boolean p1 = true;
+        boolean p2 = true;
+
+        for (int i = 0; i < 6; i++){
+            if (board[i] != 0)
+                p1 = false;
+            if (board[across(i)] != 0)
+                p2 = false;
+            if (!p1 && !p2)
+                return false;
+        }
+        return true;
+    }
+
+    public void clear() {
+        for (int i = 0; i < 6; i++) {
+            board[6] += board[i];
+            board[i] = 0;
+            board[13] += board[across(i)];
+            board[across(i)] = 0;
+        }
+    }
+
     /**
      * This method calculates the piece across from the one selected.
      * across = piece + ((6 - piece) * 2)
@@ -181,11 +210,13 @@ public class Game {
     }
 
     public void printBoard() {
+        System.out.printf("   P2  :   1     2      3      4       5      6\n");
         System.out.printf("+------+------+------+------+------+------+------+------+\n");
         System.out.printf("|      |  %02d  |  %02d  |  %02d  |  %02d  |  %02d  |  %02d  |      |\n", board[12], board[11], board[10], board[9], board[8], board[7]);
         System.out.printf("|  %02d  |------+------+------+------+------+------|  %02d  |\n", board[13], board[6]);
         System.out.printf("|      |  %02d  |  %02d  |  %02d  |  %02d  |  %02d  |  %02d  |      |\n", board[0], board[1], board[2], board[3], board[4], board[5]);
         System.out.printf("+------+------+------+------+------+------+------+------+\n");
+        System.out.printf("          1     2      3      4       5      6   :  P1\n");
     }
 
 }
