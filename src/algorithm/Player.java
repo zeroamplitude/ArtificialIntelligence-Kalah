@@ -13,6 +13,8 @@ public class Player {
      */
     private Stack<int[]> board;
 
+    private Stack<Integer> turn;
+
     private int playerID;
 
     private GameSimulator game;
@@ -24,6 +26,7 @@ public class Player {
         this.playerID = playerID;
         this.game = new GameSimulator();
         this.board = new Stack<int[]>();
+        this.turn = new Stack<Integer>();
         this.scores = new HashMap<Integer, Integer[]>();
     }
 
@@ -36,23 +39,24 @@ public class Player {
            this.scores.put(i, new Integer[]{0, 0, 0, 0});
 
         this.board.push(board);
+        this.turn.push(playerID);
 
         // simulate game
-        simulateGame(moves, playerID);
+        simulateGame(moves);
 
         // calculate the best move
         int move = calcBestMove(scores);
         return move;
     }
 
-    public void simulateGame(Queue<Integer> moves, int player) {
+    public void simulateGame(Queue<Integer> moves) {
 
         Integer move;
         while ((move = moves.poll()) != null) {
 
-            System.out.println("Player:" + player + " Move:" + (move + 1) + "\nbefore");
+            System.out.println("Player:" + turn.peek() + " Move:" + (move + 1));
             // simulate the move
-            int nextTurn = simulateMove(move, player, this.board.peek());
+            int nextTurn = simulateMove(move, turn.peek(), this.board.peek());
 
             int[] b = game.getBoard();
             // Base Case: game over
@@ -70,14 +74,16 @@ public class Player {
                     scores.get(move)[3] += 1; // tie
 
                 this.board.pop();
+                this.turn.pop();
 
             } else {
-                board.push(b.clone());
-
                 Queue<Integer> tmpMoves = getMoves(nextTurn, board.peek());
 
+                board.push(b.clone());
+                turn.push(nextTurn);
+
                 // recursively call simGame until complete
-                simulateGame(tmpMoves, nextTurn);
+                simulateGame(tmpMoves);
 
             }
         }
@@ -100,34 +106,22 @@ public class Player {
 
     public int simulateMove(int move, int turn, int[] board) {
         game.setGameState(board, turn);
+        System.out.println("before");
         game.printBoard();
         int nextTurn = game.move(move, turn);
+        System.out.println("after");
         game.printBoard();
         return nextTurn;
     }
 
-//    public int getScore(int player, int[] board) {
-//        int pl1Score = board[6];
-//        int pl2Score = board[13];
-//        int diff;
-//        if (player == 1)
-//            diff = pl1Score - pl2Score;
-//        else
-//            diff = pl2Score - pl1Score;
-//        return diff;
-//    }
-
     public int calcBestMove(Map<Integer, Integer[]> scores) {
-        double pl1WinRatio;
-        double pl2WinRatio;
-        double tieRatio;
-
         double bestRatio = 0;
         int bestMove = 0;
         for (int i : scores.keySet()) {
-            pl1WinRatio = (((double)scores.get(i)[1]) / (double)scores.get(i)[0]);
-            pl2WinRatio = (((double)scores.get(i)[2]) / (double)scores.get(i)[0]);
-            tieRatio = (((double)scores.get(i)[3]) / (double)scores.get(i)[0]);
+            double tieRatio = (((double)scores.get(i)[3]) / (double)scores.get(i)[0]);
+            double pl1WinRatio = (((double)scores.get(i)[1]) / (double)scores.get(i)[0]) + tieRatio/2; // tie 50% chance
+            double pl2WinRatio = (((double)scores.get(i)[2]) / (double)scores.get(i)[0]) + tieRatio/2; // tie 50% chance
+
             System.out.printf("P1Wins:%d, P2Wins:%d Ties:%d Total#Games:%d\n", scores.get(i)[1], scores.get(i)[2], scores.get(i)[3], scores.get(i)[0]);
 
             System.out.println(playerID);

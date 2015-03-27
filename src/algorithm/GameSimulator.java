@@ -216,7 +216,7 @@ public class GameSimulator {
         System.out.printf("|  %02d  |------+------+------+------+------+------|  %02d  |\n", board[13], board[6]);
         System.out.printf("|      |  %02d  |  %02d  |  %02d  |  %02d  |  %02d  |  %02d  |      |\n", board[0], board[1], board[2], board[3], board[4], board[5]);
         System.out.printf("+------+------+------+------+------+------+------+------+\n");
-        System.out.printf("          1     2      3      4       5      6   :  P1\n");
+        System.out.printf("           1     2      3      4       5      6  :  P1\n");
     }
 
 }
