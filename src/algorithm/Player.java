@@ -11,7 +11,7 @@ public class Player {
     /**
      * An array of integers that represent the current board state
      */
-    private int[] board;
+    private Stack<int[]> board;
 
     private int playerID;
 
@@ -23,7 +23,7 @@ public class Player {
     public Player(int playerID) {
         this.playerID = playerID;
         this.game = new GameSimulator();
-        this.board = game.getBoard();
+        this.board = new Stack<int[]>();
         this.scores = new HashMap<Integer, Integer[]>();
     }
 
@@ -31,55 +31,53 @@ public class Player {
         // clear the scores
         scores.clear();
 
-        // set board
-        this.board = board;
         Queue<Integer> moves = getMoves(playerID, board);
         for (Integer i : moves)
            this.scores.put(i, new Integer[]{0, 0, 0, 0});
 
+        this.board.push(board);
+
         // simulate game
-        simulateGame(moves, playerID, board);
+        simulateGame(moves, playerID);
 
         // calculate the best move
         int move = calcBestMove(scores);
         return move;
     }
 
-    public void simulateGame(Queue<Integer> moves, int player, int[] board) {
-
-//        this.board = board;
+    public void simulateGame(Queue<Integer> moves, int player) {
 
         Integer move;
         while ((move = moves.poll()) != null) {
 
-            System.out.println("Player:" + player + " Move:" + (move + 1));
+            System.out.println("Player:" + player + " Move:" + (move + 1) + "\nbefore");
             // simulate the move
-            int nextTurn = simulateMove(move, player, board);
+            int nextTurn = simulateMove(move, player, this.board.peek());
 
-            int[] tmpBoard = game.getBoard();
-            game.printBoard();
+            int[] b = game.getBoard();
             // Base Case: game over
-            if (nextTurn == 0 || tmpBoard[6] > 18 || tmpBoard[13] > 18) {
+            if (nextTurn == 0 || board.peek()[6] > 18 || board.peek()[13] > 18) {
 
                 // count game
                 scores.get(move)[0] += 1; // increment games
 
                 // get score of game
-                if (tmpBoard[6] > tmpBoard[13])
+                if (b[6] > b[13])
                     scores.get(move)[1] += 1; // player 1 wins
-                else if (tmpBoard[13] > tmpBoard[6])
+                else if (b[13] > b[6])
                     scores.get(move)[2] += 1; // player 2 wins
                 else
                     scores.get(move)[3] += 1; // tie
 
-
+                this.board.pop();
 
             } else {
+                board.push(b.clone());
 
-                Queue<Integer> tmpMoves = getMoves(nextTurn, tmpBoard);
+                Queue<Integer> tmpMoves = getMoves(nextTurn, board.peek());
 
                 // recursively call simGame until complete
-                simulateGame(tmpMoves, nextTurn, tmpBoard);
+                simulateGame(tmpMoves, nextTurn);
 
             }
         }
@@ -102,7 +100,10 @@ public class Player {
 
     public int simulateMove(int move, int turn, int[] board) {
         game.setGameState(board, turn);
-        return game.move(move, turn);
+        game.printBoard();
+        int nextTurn = game.move(move, turn);
+        game.printBoard();
+        return nextTurn;
     }
 
 //    public int getScore(int player, int[] board) {
