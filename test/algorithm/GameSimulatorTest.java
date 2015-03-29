@@ -35,13 +35,13 @@ public class GameSimulatorTest {
         System.out.println("Move Test");
         assertArrayEquals(BOARD, game.getBoard());
 
-        game.move(4, 1);
+        game.move(4, 1, BOARD);
         int[] TEMP_BOARD = new int[] {3, 3, 3, 0, 4, 4, 1, 3, 3, 3, 3, 3, 3, 0};
         game.printBoard();
         assertArrayEquals(TEMP_BOARD, game.getBoard());
         assertEquals(1, game.getTurn());
 
-        game.move(1, 1);
+        game.move(1, 1, game.getBoard());
         game.printBoard();
         TEMP_BOARD = new int[] {0, 4, 4, 0, 4, 4, 5, 3, 3, 0, 3, 3, 3, 0};
         assertArrayEquals(TEMP_BOARD, game.getBoard());
@@ -50,7 +50,7 @@ public class GameSimulatorTest {
         System.out.println("Test skip opponents home");
         TEMP_BOARD = new int[] {0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0};
         game.setGameState(TEMP_BOARD, 0);
-        game.move(6, 1);
+        game.move(6, 1, TEMP_BOARD);
         game.printBoard();
         TEMP_BOARD = new int[] {0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 5};
         assertArrayEquals(TEMP_BOARD, game.getBoard());
@@ -59,7 +59,7 @@ public class GameSimulatorTest {
         System.out.println("Test skip opponents home p2");
         TEMP_BOARD = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0};
         game.setGameState(TEMP_BOARD, 2);
-        game.move(1, 2);
+        game.move(1, 2, TEMP_BOARD);
         game.printBoard();
     }
 
@@ -79,7 +79,7 @@ public class GameSimulatorTest {
         System.out.println("Test skip opponents home p2");
         int[] TEMP_BOARD = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0};
         game.setGameState(TEMP_BOARD, 1);
-        game.move(1, 2);
+        game.move(1, 2, TEMP_BOARD);
         game.printBoard();
 
     }

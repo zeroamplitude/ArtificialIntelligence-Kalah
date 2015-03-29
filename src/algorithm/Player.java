@@ -1,6 +1,7 @@
 package algorithm;
 
 import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * Player:
@@ -8,85 +9,108 @@ import java.util.*;
  */
 public class Player {
 
-    /**
-     * An array of integers that represent the current board state
-     */
-    private Stack<int[]> board;
+    private class GameState {
+        public int[] board;
+        public int turn;
+        public Queue<Integer> moves;
 
-    private Stack<Integer> turn;
+        public GameState(int[] board, int turn, Queue<Integer> moves) {
+            this.board = board;
+            this.turn = turn;
+            this.moves = moves;
+        }
+    }
 
     private int playerID;
 
     private GameSimulator game;
 
-    // An 2D array that holds game outcomes of each move
-    Map<Integer, Integer[]> scores;
+    private Stack<GameState> state;
 
     public Player(int playerID) {
         this.playerID = playerID;
         this.game = new GameSimulator();
-        this.board = new Stack<int[]>();
-        this.turn = new Stack<Integer>();
-        this.scores = new HashMap<Integer, Integer[]>();
+        this.state = new Stack<GameState>();
     }
 
     public int makePlay(int[] board) {
-        // clear the scores
-        scores.clear();
 
+        // get all the possible moves
         Queue<Integer> moves = getMoves(playerID, board);
-        for (Integer i : moves)
-           this.scores.put(i, new Integer[]{0, 0, 0, 0});
-
-        this.board.push(board);
-        this.turn.push(playerID);
-
-        // simulate game
-        simulateGame(moves);
-
-        // calculate the best move
-        int move = calcBestMove(scores);
-        return move;
-    }
-
-    public void simulateGame(Queue<Integer> moves) {
-
+        Map<Integer, int[]> scores = new HashMap<Integer, int[]>();
         Integer move;
         while ((move = moves.poll()) != null) {
-
-            System.out.println("Player:" + turn.peek() + " Move:" + (move + 1));
-            // simulate the move
-            int nextTurn = simulateMove(move, turn.peek(), this.board.peek());
-
-            int[] b = game.getBoard();
-            // Base Case: game over
-            if (nextTurn == 0 || board.peek()[6] > 18 || board.peek()[13] > 18) {
-
-                // count game
-                scores.get(move)[0] += 1; // increment games
-
-                // get score of game
-                if (b[6] > b[13])
-                    scores.get(move)[1] += 1; // player 1 wins
-                else if (b[13] > b[6])
-                    scores.get(move)[2] += 1; // player 2 wins
-                else
-                    scores.get(move)[3] += 1; // tie
-
-                this.board.pop();
-                this.turn.pop();
-
-            } else {
-                Queue<Integer> tmpMoves = getMoves(nextTurn, board.peek());
-
-                board.push(b.clone());
-                turn.push(nextTurn);
-
-                // recursively call simGame until complete
-                simulateGame(tmpMoves);
-
-            }
+            int newTurn = simulateMove(move, playerID, board.clone());
+            int[] newBoard = game.getBoard().clone();
+            scores.put(move, simulateGame(newBoard.clone(), newTurn));
         }
+
+        // calculate the best move
+        int best = calcBestMove(scores);
+
+        return best;
+    }
+
+    public int[] simulateGame(int[] board, int turn) {
+
+        int[] scores = new int[4];
+
+        // Base Case: game over
+        if (turn == 0 || board[6] > 18 || board[13] > 18) {
+            if (playerID == 1)
+                scores[0] = board[6] - board[13];
+            else
+                scores[0] = board[13] = board[6];
+
+            if (scores[0] > 0)
+                scores[1] = 2;
+            else if (scores[0] == 0)
+                scores[1] = 1;
+            else
+                scores[1] = 0;
+
+            scores[2] = 2;
+
+            scores[3] = 1;
+
+//            state.pop();
+
+        } else {
+
+            // Get all moves
+            Queue<Integer> moves = getMoves(turn,board);
+
+            state.push(new GameState(board.clone(), turn, moves));
+
+            // loop through each move
+            Integer move;
+            while((move = moves.poll()) != null) {
+
+                int nextTurn = simulateMove(move, turn, board.clone()); //state.peek().turn, state.peek().board.clone());
+                int[] nextBoard = game.getBoard().clone();
+
+                int[] tmpScores = simulateGame(nextBoard.clone(), nextTurn);
+
+
+                if ((tmpScores[1] == 2) && (tmpScores[2] == 2) && (tmpScores[3] == 1)) {
+                    scores[0] = tmpScores[0];
+                    scores[1] = 2;
+                    scores[2] = 2;
+                    scores[3] = 0;
+                    return scores;
+
+                } else {
+                    scores[0] += tmpScores[0];
+                    scores[1] += tmpScores[1];
+                    scores[2] += tmpScores[2];
+                    scores[3] = 0;
+                }
+            }
+            state.pop();
+
+        }
+
+        return scores;
     }
 
     public Queue<Integer> getMoves(int player, int[] board) {
@@ -105,42 +129,27 @@ public class Player {
     }
 
     public int simulateMove(int move, int turn, int[] board) {
-        game.setGameState(board, turn);
+        System.out.println("Player:" + turn + " move:" + (move + 1));
+        game.setGameState(board.clone(), turn);
         System.out.println("before");
         game.printBoard();
-        int nextTurn = game.move(move, turn);
+        int nextTurn = game.move(move, turn, board.clone());
         System.out.println("after");
         game.printBoard();
         return nextTurn;
     }
 
-    public int calcBestMove(Map<Integer, Integer[]> scores) {
-        double bestRatio = 0;
+    public int calcBestMove(Map<Integer, int[]> scores) {
         int bestMove = 0;
-        for (int i : scores.keySet()) {
-            double tieRatio = (((double)scores.get(i)[3]) / (double)scores.get(i)[0]);
-            double pl1WinRatio = (((double)scores.get(i)[1]) / (double)scores.get(i)[0]) + tieRatio/2; // tie 50% chance
-            double pl2WinRatio = (((double)scores.get(i)[2]) / (double)scores.get(i)[0]) + tieRatio/2; // tie 50% chance
-
-            System.out.printf("P1Wins:%d, P2Wins:%d Ties:%d Total#Games:%d\n", scores.get(i)[1], scores.get(i)[2], scores.get(i)[3], scores.get(i)[0]);
-
-            System.out.println(playerID);
-
-            if (playerID == 1) {
-                if (pl1WinRatio > bestRatio) {
-                    bestRatio = pl1WinRatio;
-                    bestMove = i;
-                }
-                System.out.println(playerID + " " + (i + 1) + " Win Ratio: " + pl1WinRatio);
-            } else {
-                if (pl2WinRatio > bestRatio) {
-                    bestRatio = pl2WinRatio;
-                    bestMove = i;
-                }
-                System.out.println(playerID + " " + (i + 1)  + " Win Ratio: " + pl2WinRatio);
+        double bestRatio = 0;
+        for (Entry<Integer, int[]> curScores : scores.entrySet()) {
+            System.out.printf("%d | %d, %d, % d \n", curScores.getKey()+1, curScores.getValue()[0], curScores.getValue()[1], curScores.getValue()[2]/2);
+            double cur = (double) curScores.getValue()[1] / (double) curScores.getValue()[2];
+            if (cur > bestRatio) {
+                bestRatio = cur;
+                bestMove = curScores.getKey();
             }
         }
-
         return bestMove + 1;
     }
 
@@ -148,4 +157,6 @@ public class Player {
         for (Integer[] score : scores.values())
             System.out.printf("%d, %d, % d", score[0], score[1], score[2]);
     }
+
+
 }

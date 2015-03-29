@@ -30,7 +30,7 @@ public class PlayerTest extends TestCase {
     }
 
     public void testGetMoves() throws Exception {
-        int[] TEMP_BOARD = new int[] {3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 0};
+        int[] TEMP_BOARD = new int[] {0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0};
         int move = player.makePlay(TEMP_BOARD);
         System.out.print(move);
 

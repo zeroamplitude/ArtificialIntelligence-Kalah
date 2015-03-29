@@ -4,28 +4,18 @@ package algorithm;
  * This class represents a Game of Kalah. It's responsibilities are control game flow and updating GUI elements as necessary.
  */
 public class GameSimulator {
-	/**
-	 * An integer that represents the game's id
-	 */
-	private int gameID;
+
 	/**
 	 * An object of type board that represents the game's board.
 	 */
 	private int[] board;
-
+    /**
+     * An integer that represents the player whose turn it is
+     */
     private int turn;
 
     public GameSimulator() {
         this.board = new int[14];
-
-        // create a  board with specified number of seeds
-        for (int i = 0; i < 14 ; i++) {
-            if (i == 6 || i == 13)
-                board[i] = 0;
-            else
-                board[i] = 3;
-        }
-
         this.turn = 1;
     }
 
@@ -44,24 +34,6 @@ public class GameSimulator {
     }
 
     /**
-	 * This method calls the move method of the player whose turn it is,
-	 * passes the results to board which executes the move. If the board
-	 * returns an invalid move the player whose turn it is, will be signaled
-	 * to move again. If board signals game over then game exits.
-	 */
-//	public boolean update() {
-//        int move;
-//        if (turn == 1)
-//            move = pl1.makeMove(board);
-//        else
-//            move = pl2.makeMove(board);
-//
-//        turn = move(move, turn);
-//
-//        return turn != 0;
-//    }
-
-    /**
      * This method is responsible for making a move on the board. Before the move is executed within the method validation methods are
      * called on the input. If input is invalid then the move is not executed and the player is requested to move again. Otherwise the
      * seeds are transferred from the source to the adjacent stores by
@@ -74,9 +46,12 @@ public class GameSimulator {
      * player who is making the move.
      * @return An integer that represent the player whose turn is next.
      */
-    public int move(int store, int pid) {
+    public int move(int store, int pid, int[] board) {
         // adjust the store to follow boards indexes
 //        store -= 1;
+        this.board = board;
+        this.turn = pid;
+
         // if player 2 adjust store
         if (pid == 2)
             store = across(store);
