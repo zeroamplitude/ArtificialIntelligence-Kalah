@@ -114,12 +114,19 @@ class Player{
                     if (newBoard[1][convertMoveToCell(nextSimMove,1)] != 0){
                         //System.out.println("TRYING MOVE: " + nextSimMove + " PLAYER: " + newPlayer);
                         tempArray = getValueOfMove(nextSimMove,newPlayer,newBoard);
-                        if (newPlayer == 1 && tempArray[1] == 1 && tempArray[2] == 1 && tempArray[3] == 1){
+                        if (newPlayer == 1 && tempArray[1] == 1 && tempArray[2] == 1 && tempArray[3] == 1) {
                             moveValueArray[0] = tempArray[0];
                             moveValueArray[1] = 1;
                             moveValueArray[2] = 1;
                             moveValueArray[3] = 0;
 //                            System.out.println("PRUNING OUTPUT");
+                            return moveValueArray;
+                        }else if (newPlayer == 2 && tempArray[1] == 0 && tempArray[2] == 1 && tempArray[3] == 1){
+                            moveValueArray[0] = tempArray[0];
+                            moveValueArray[1] = 0;
+                            moveValueArray[2] = 1;
+                            moveValueArray[3] = 0;
+//                            System.out.println("PRUNING 2 OUTPUT");
                             return moveValueArray;
                         }else {
                             moveValueArray[0] += tempArray[0];
@@ -147,6 +154,14 @@ class Player{
                             moveValueArray[3] = 0;
 //                            System.out.println("PRUNING OUTPUT");
                             return  moveValueArray;
+
+                        }else if (newPlayer == 2 && tempArray[1] == 0 && tempArray[2] == 1 && tempArray[3] == 1){
+                            moveValueArray[0] = tempArray[0];
+                            moveValueArray[1] = 0;
+                            moveValueArray[2] = 1;
+                            moveValueArray[3] = 0;
+//                            System.out.println("PRUNING OPP OUTPUT");
+                            return moveValueArray;
                         }else {
                             moveValueArray[0] += tempArray[0];
                             moveValueArray[1] += tempArray[1];
@@ -513,7 +528,7 @@ class Player{
             oppAverageScore = oppAverageScore/validOppMoves;
             System.out.println("OPTIONAL AVERAGE: " + oppAverageScore);
             System.out.println("Best Opp Move: " + oppBestMove + " Score: " + oppMoveValues[0][oppBestMove] + " Games: " + oppMoveValues[1][oppBestMove]);
-            if (((double)oppMoveValues[0][oppBestMove]/(double)oppMoveValues[1][oppBestMove]) > (oppAverageScore + 0.5)){
+            if (((double)oppMoveValues[0][oppBestMove]/(double)oppMoveValues[1][oppBestMove]) > (oppAverageScore + 1.0)){
                 bestMove = oppBestMove;
                 System.out.println("USING OPTION 2 MOVE");
             }
